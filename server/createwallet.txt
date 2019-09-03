@@ -1,0 +1,54 @@
+1.Geth 설치
+
+2.genesis.json 파일 프로젝트 파일안에 생성
+
+{
+  "config": {
+    "chainId": 33, //네트워크 식별자
+    "homesteadBlock": 0,
+    "eip155Block": 0,
+    "eip158Block": 0
+  },
+  "nonce": "0x0000000000000033",
+  "timestamp": "0x0",
+  "parentHash": "0x0000000000000000000000000000000000000000000000000000000000000000",
+  "gasLimit": "0x8000000",
+  "difficulty": "0x100", //채굴 난이도
+  "mixhash": "0x0000000000000000000000000000000000000000000000000000000000000000",
+  "coinbase": "0x3333333333333333333333333333333333333333",
+  "alloc": {}
+}
+
+원하는 chainId 설정
+
+3. genesis 블록 생성
+
+ geth --datadir 프로젝트파일 init 프로젝트파일/genesis.json
+
+
+4. geth 네트워크 실행
+
+geth --rpc --rpcapi net,web3,eth,miner,admin,personal --datadir ./ --networkid 33 --nodiscover console
+
+5. geth 네트워크 접속
+
+geth attach http://localhost:8545
+
+6. index.js생성 (web3 사용)
+
+var Web3 = require("web3")
+web3 = new Web3(new Web3.providers.HttpProvider("http://localhost:8545")); // geth네트워크 주소
+    
+var newAccount = web3.eth.personal.newAccount("yo");
+console.log(newAccount)
+
+7. node index.js로 실행
+
+**node gyp 에러 발생할 경우
+원인 : python과 vs환경이 다르기 때문에 발생 
+해결방법 :npm install -g windows-build-tools
+
+** Web3는 설치했지만 Cannot find module 'web3' 에러가 발생할수있음
+원인 : npm설치된 파일과 프로젝트 파일의 드라이브가 달라 npm을 찾지못해 발생
+해결방법 : 해당 프로젝트 파일에 web3의존성 추가후 재설치 
+
