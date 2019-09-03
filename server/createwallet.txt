@@ -1,5 +1,6 @@
 1.Geth 설치
 
+
 2.genesis.json 파일 프로젝트 파일안에 생성
 
 {
