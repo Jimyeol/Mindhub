@@ -86,4 +86,8 @@ contract MindHub {
         uint a;
         a = 20;
     }
+
+    function _purchase_product() public onlybuyer(msg.sender) {
+        
+    }
 }
