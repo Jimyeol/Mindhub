@@ -70,10 +70,10 @@ contract MindHub {
     //판매자 등록
     function _register_seller(string memory _name) public {
         //sellers.push(Seller(msg.sender, _sellerNumber, _name, ));
-        _seller_add_seq();
         sellerInfo[msg.sender].account = msg.sender;
         sellerInfo[msg.sender].sellerNumber = sellerSeq;
         sellerInfo[msg.sender].name = _name;
+         _seller_add_seq();
         emit RegisterSellerConfirm();
     }
     
@@ -112,11 +112,25 @@ contract MindHub {
         return productSeq;
     }
 
-    function _register_product(uint32 _product_id, string memory _product_name, uint32 _price) public onlySeller(msg.sender) {
+    //판매 물품 등록
+    function _register_product(string memory _product_name, uint32 _price) public onlySeller(msg.sender) {
+        
+        sellerInfo[msg.sender].productArray.push(productSeq);
+        sellerInfo[msg.sender].products_list[productSeq].product_id = productSeq;
+        sellerInfo[msg.sender].products_list[productSeq].product_name = _product_name;
+        sellerInfo[msg.sender].products_list[productSeq].price = _price;
+        sellerInfo[msg.sender].products_list[productSeq].time = uint32(now);
         _product_add_seq();
-        sellerInfo[msg.sender].productArray.push(productSeq);
-        sellerInfo[msg.sender].productArray.push(productSeq);
-        products.push(Product(_product_id, _product_name, _price, uint32(now)));
+        //products.push(Product(_product_id, _product_name, _price, uint32(now)));
+    }
+
+    //판매자의 판매 물품 불러오기
+    //문제점 불러오는걸 굳이 해야하나???
+    function _get_product(address _account, uint32 _seq) view public returns (string memory, uint32, uint32) {
+        return( sellerInfo[_account].products_list[_seq].product_name,
+        sellerInfo[_account].products_list[_seq].price,
+        sellerInfo[_account].products_list[_seq].time);
+        //products.push(Product(_product_id, _product_name, _price, uint32(now)));
     }
 
     // function _purchase_product() public payable onlybuyer(msg.sender) {
