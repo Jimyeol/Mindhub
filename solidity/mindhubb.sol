@@ -6,7 +6,7 @@ contract MindHub {
     struct Product {
         uint32 product_id;
         string product_name;
-        uint32 price;
+        uint price;
         uint32 time;
     }
     uint32 productSeq;    //물품 갯수
@@ -99,6 +99,16 @@ contract MindHub {
         return (buyerInfo[_account].account, buyerInfo[_account].buyerNumber, buyerInfo[_account].name);
     }
 
+    //
+    function _purchase_product(address payable _account, uint _seq) public payable {
+        //address payable seller = _account;
+        //require(sellerInfo[_account].products_list[_seq].price == msg.value);
+        //_account.transfer(sellerInfo[_account].products_list[_seq].price);
+        
+        msg.sender.transfer(sellerInfo[_account].products_list[_seq].price);
+        _account.transfer(address(this).balance);
+    }
+
     /*-----------------------------------------------------------------------------------*/
     /*-----------------------------------------------------------------------------------*/
 
@@ -113,7 +123,7 @@ contract MindHub {
     }
 
     //판매 물품 등록
-    function _register_product(string memory _product_name, uint32 _price) public onlySeller(msg.sender) {
+    function _register_product(string memory _product_name, uint _price) public onlySeller(msg.sender) {
         
         sellerInfo[msg.sender].productArray.push(productSeq);
         sellerInfo[msg.sender].products_list[productSeq].product_id = productSeq;
@@ -126,7 +136,7 @@ contract MindHub {
 
     //판매자의 판매 물품 불러오기
     //문제점 불러오는걸 굳이 해야하나???
-    function _get_product(address _account, uint32 _seq) view public returns (string memory, uint32, uint32) {
+    function _get_product(address _account, uint32 _seq) view public returns (string memory, uint, uint32) {
         return( sellerInfo[_account].products_list[_seq].product_name,
         sellerInfo[_account].products_list[_seq].price,
         sellerInfo[_account].products_list[_seq].time);
