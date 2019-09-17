@@ -142,13 +142,17 @@ contract MindHub {
     }
     
     //판매자 정보 불러오기
-    function _get_seller_info(address _account) view public returns  (address) {
+    function _get_seller_info(address _account) view public onlySeller(_account) returns (address) {
         return (userList[_account].account);
     }
     
     //물품 갯수 불러오기
     function _get_product_count() view public returns (uint) { 
-        return productId;
+        return productId+1;
+    }
+    //결결제 갯수 불러오기
+    function _get_payment_count() view public returns (uint) { 
+        return paymentId+1;
     }
 
 
