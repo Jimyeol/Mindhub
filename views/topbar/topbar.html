@@ -8,7 +8,13 @@
     <style>
         #topbar {
             background-color: #d3e682;
-            padding: 20px;
+            padding: 15px;
+            border: 0;
+            margin: 0;
+        }
+        #top-under-bar {
+            background-color: #76a650;
+            padding: 1.5px;
             border: 0;
             margin: 0;
         }
@@ -21,7 +27,7 @@
             Category Link
             Premium Item Link -->
             <div id='topbar'>
-            <a href='/'>HOME</a>
+            <a href='/'><img src='media/MindMade.jpg' width="100px" height="40px"></a>
             <a href='/shop'>SHOP</a>
             <% if (!data.userData) { %>
             <a href='/login'>LOGIN</a>
@@ -45,5 +51,6 @@
             
             <% } %>
         </div>
+        <div id="top-under-bar"></div>
 </body>
 </html>
