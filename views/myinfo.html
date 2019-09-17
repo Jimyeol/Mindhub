@@ -13,7 +13,7 @@
     <%- include ./topbar/topbar.html %>
 
     <hr>
-    My Information <a href='/transactioninfo'>거래 내역 조회</a>
+    My Information <a class="btn btn-success btn-sm" href='/transactioninfo'>거래 내역 조회</a>
     <p>
         내 아이디 : <%= data.userData.userID %>
     </p>
@@ -42,7 +42,8 @@
     <!-- wallet Unlock 현재는 의미 없음 -->
     <form>
         Enter Wallet PW : <input type='text' name='walletPW' id='walletPW'></br>
-        <input type='button' value='unlock' onclick="unlockWallet()">
+        <p><input type="button" value='unlock' onclick="unlockWallet()"></p>
+        <!-- <input type='button' value='unlock' onclick="unlockWallet()"> -->
     </form>
 
     <% if(data.userData.userDN == 0) { %>
