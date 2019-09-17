@@ -1,148 +1,171 @@
 pragma solidity ^0.5.0;
 
 contract MindHub {
+
     /*
-    물품 Struct */
+    배송 상태 {구매완료, 배송중, 배송완료, 구매확정, 완료}
+    */
+    enum State { PurchaseCompletion, 
+    Shipping, 
+    DeliveryComplete, 
+    PurchaseConfirmation, 
+    Completion, 
+    Cancel }
+
+    /*
+    물품 Struct 
+    name 물품이름
+    price 가격
+    seller_owner 물품 주인
+    */
     struct Product {
-        uint32 product_id;
-        string product_name;
+        string name;
         uint price;
-        uint32 time;
+        address payable seller_owner;
     }
-    uint32 productSeq;    //물품 갯수
-     
+
     /*
-    판매자 Struct */
-    struct Seller {
+    사용자 Struct 
+    account 사용자 계좌
+    paymentArray 결제내역
+    productArray 물품내역
+    isSeller 판매자가 등록여부
+    */
+    struct User {
         address account;
-        uint32 sellerNumber;
-        string name;
+        uint[] paymentArray;
         uint[] productArray;
-        mapping(uint => Product) products_list;
+        bool isSeller;
     }
-    uint32 sellerSeq;
 
     /*
-    구매자 Struct */
-    struct Buyer {
-        address account;
-        uint24 buyerNumber;
-        string name;
+    결제 Struct 
+    price 토큰 가격
+    deliveryTime 배송날짜
+    sellerAddress 판매자 계좌주소
+    buyerAddress 구매자 계좌주소
+    state 배송상태
+    */
+    struct Payment {
+        uint price;
+        uint deliveryTime;
+        address payable sellerAddress;
+        address payable buyerAddress;
+        State state;
     }
 
-    //상태
-    enum State { Buy, Delivery, Arrive, Pay, Cancel, ForcePay }
-    State public state;
-   
+    uint private productId; //물품 번호
+    uint private paymentId; //결제 번호
+    uint private officialDelveryTime = 30; //배송확정 지연시간 (30초)
 
-    
-    Seller[] private sellers;
-    Buyer[] private buyers;
-    Product[] private products;
+    mapping(address => User) userList;
+    mapping(uint => Payment) payList;
+    mapping(uint => Product) productList;
 
-    mapping(address => Seller)sellerInfo;
-    mapping(address => Buyer)buyerInfo;
-
-    event RegisterSellerConfirm();
-    event RegisterBuyerConfirm();
     
     constructor() public {
-        productSeq = 0; //시퀀스 넘버 초기화
-        sellerSeq = 0;
+        productId = 0;
+        paymentId = 0;
     }
 
+     event evtPurchaseProduct();
+     event evtPurchaseConfirmation();
+     event evtAdobt();
+     event evtAutoConfirm();
+     event evtRegisterSeller();
+     event evtRegisterProduct();
+
+    
     //오직 판매자만 접근하는 모디파이어
     modifier onlySeller(address _address) {
-        require(sellerInfo[_address].account == msg.sender);
+        require(userList[_address].isSeller == true);
         _;
     }
-
-     //오직 구매자만 접근하는 모디파이어
-    modifier onlyBuyer(address _address) {
-        require(buyerInfo[_address].account == msg.sender);
+    
+    //구매를 했는지 확인하는 모디파이어
+    modifier isPurchaseCompletion(State state) {
+        require( state == State.PurchaseCompletion );
         _;
     }
-
-    function _seller_add_seq() private { 
-        sellerSeq++;
+    
+    /*
+    ============================구매부분================================
+    */
+    //물품 구매
+    function _purchase_product(uint _productId) public payable {
+        require(productList[_productId].price == msg.value);
+        userList[msg.sender].paymentArray.push(paymentId);
+        payList[paymentId].price = msg.value;
+        payList[paymentId].sellerAddress = productList[_productId].seller_owner;
+        payList[paymentId].buyerAddress = msg.sender;
+        payList[paymentId].state = State.PurchaseCompletion;
+        payList[paymentId].deliveryTime = now + officialDelveryTime;
+        _add_payid();
+        emit evtPurchaseProduct();
     }
 
-    //판매자 등록
-    function _register_seller(string memory _name) public {
-        //sellers.push(Seller(msg.sender, _sellerNumber, _name, ));
-        sellerInfo[msg.sender].account = msg.sender;
-        sellerInfo[msg.sender].sellerNumber = sellerSeq;
-        sellerInfo[msg.sender].name = _name;
-         _seller_add_seq();
-        emit RegisterSellerConfirm();
+    function _add_payid() private {
+        paymentId++;
+    }
+    
+    //물품 구매 확정 (배송완료)
+    function _purchase_confirmation(uint _payId, uint _productId) public 
+    isPurchaseCompletion(payList[_payId].state) {
+        require(productList[_productId].seller_owner == payList[_payId].sellerAddress);
+        payList[_payId].sellerAddress.transfer(payList[_payId].price);
+        payList[_payId].state = State.Completion;
+        emit evtPurchaseConfirmation();
+    }
+    
+    //물품 결제 취소 (결제취소)
+    function _adobt(uint _payId) public 
+    isPurchaseCompletion(payList[_payId].state) {
+        payList[_payId].buyerAddress.transfer(payList[_payId].price);
+        payList[_payId].state = State.Cancel;
+        emit evtAdobt();
+    }
+    
+    //물품 강제 배송확정 (30초후)
+    function _auto_confirm(uint _payId, uint _productId) public {
+        require(now >= payList[_payId].deliveryTime);
+        _purchase_confirmation(_payId, _productId);
+        emit evtAutoConfirm();
+    }
+
+
+    /*
+    ============================판매자 등록================================
+    */
+    function _register_seller() public {
+        userList[msg.sender].isSeller = true;
+        emit evtRegisterSeller();
     }
     
     //판매자 정보 불러오기
-    function _get_seller_info(address _account) view public returns  (address, uint32, string memory) {
-        return (sellerInfo[_account].account, sellerInfo[_account].sellerNumber, sellerInfo[_account].name);
-    }
-
-
-    /*-----------------------------------------------------------------------------------*/
-    /*-----------------------------------------------------------------------------------*/
-    //구매자 등록
-    function _register_buyer(uint24 _buyerNumber, string memory _name) public {
-        buyers.push(Buyer(msg.sender, _buyerNumber, _name));
-        buyerInfo[msg.sender].account = msg.sender;
-        buyerInfo[msg.sender].buyerNumber = _buyerNumber;
-        buyerInfo[msg.sender].name = _name;
-        emit RegisterBuyerConfirm();
+    function _get_seller_info(address _account) view public returns  (address) {
+        return (userList[_account].account);
     }
     
-    //구매자 정보 불러오기
-    function _get_buyer_info(address _account) view public returns (address, uint24, string memory) {
-        return (buyerInfo[_account].account, buyerInfo[_account].buyerNumber, buyerInfo[_account].name);
-    }
-
-    //
-    function _purchase_product(address payable _account, uint _seq) public payable {
-        //address payable seller = _account;
-        //require(sellerInfo[_account].products_list[_seq].price == msg.value);
-        //_account.transfer(sellerInfo[_account].products_list[_seq].price);
-        
-        msg.sender.transfer(sellerInfo[_account].products_list[_seq].price);
-        _account.transfer(address(this).balance);
-    }
-
-    /*-----------------------------------------------------------------------------------*/
-    /*-----------------------------------------------------------------------------------*/
-
-    //물품 갯수 증가
-    function _product_add_seq() private { 
-        productSeq++;
-    }
-
     //물품 갯수 불러오기
-    function _get_productseq() view public returns (uint32) { 
-        return productSeq;
+    function _get_product_count() view public returns (uint) { 
+        return productId;
     }
 
+
+    /*
+    ============================물품 등록================================
+    */
     //판매 물품 등록
     function _register_product(string memory _product_name, uint _price) public onlySeller(msg.sender) {
-        
-        sellerInfo[msg.sender].productArray.push(productSeq);
-        sellerInfo[msg.sender].products_list[productSeq].product_id = productSeq;
-        sellerInfo[msg.sender].products_list[productSeq].product_name = _product_name;
-        sellerInfo[msg.sender].products_list[productSeq].price = _price;
-        sellerInfo[msg.sender].products_list[productSeq].time = uint32(now);
-        _product_add_seq();
-        //products.push(Product(_product_id, _product_name, _price, uint32(now)));
+        userList[msg.sender].productArray.push(productId);
+        productList[productId].name = _product_name;
+        productList[productId].price = _price;
+        productList[productId].seller_owner = msg.sender;
+        _add_productid();
+        emit evtRegisterProduct();
     }
 
-    //판매자의 판매 물품 불러오기
-    //문제점 불러오는걸 굳이 해야하나???
-    function _get_product(address _account, uint32 _seq) view public returns (string memory, uint, uint32) {
-        return( sellerInfo[_account].products_list[_seq].product_name,
-        sellerInfo[_account].products_list[_seq].price,
-        sellerInfo[_account].products_list[_seq].time);
-        //products.push(Product(_product_id, _product_name, _price, uint32(now)));
+    function _add_productid() private {
+        productId++;
     }
-
-    // function _purchase_product() public payable onlybuyer(msg.sender) {
-    // }
 }
