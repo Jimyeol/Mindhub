@@ -142,6 +142,7 @@ contract MindHub {
         payList[_payId].buyerAddress, payList[_payId].price);
         //payList[_payId].buyerAddress.transfer(payList[_payId].price);
         payList[_payId].state = State.Cancel;
+        userList[payList[_payId].buyerAddress].ableBalance += payList[_payId].price;
         emit evtAdobt();
     }
     
@@ -195,8 +196,18 @@ contract MindHub {
     */
     //토큰 구매
     //web에서 현금만큼만 구매할 수 있도록 제어 해줘야함.
-    function token_purchase(uint _value) public {
+    function _token_purchase(uint _value) public {
         mindTokenContract.approve(deployer, msg.sender, _value);
         mindTokenContract.transferFrom(deployer, msg.sender, msg.sender, _value);
+        userList[msg.sender].ableBalance += _value;
+    }
+
+
+    /*
+    ===========================Balance get ============================
+    */
+
+    function _get_ablebalance() public view returns (uint blanace) {
+        return userList[msg.sender].ableBalance;
     }
 }
