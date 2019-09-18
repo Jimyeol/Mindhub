@@ -1,6 +1,6 @@
 pragma solidity ^0.5.0;
 
-//import "./ERC20/MindToken.sol";
+import "./MindToken.sol";
 
 contract MindHub {
     
@@ -112,7 +112,7 @@ contract MindHub {
 
         //토큰으로 구매하는 부분
         mindTokenContract.approve(msg.sender, msg.sender, 0);
-        mindTokenContract.increaseAllowance(msg.sender, msg.sender, price);
+        mindTokenContract.increaseAllowance(msg.sender, msg.sender, productList[_productId].price);
         userList[msg.sender].ableBalance = 
         (mindTokenContract.balanceOf(msg.sender) - productList[_productId].price);
 
@@ -139,7 +139,7 @@ contract MindHub {
     function _adobt(uint _payId) public 
     isPurchaseCompletion(payList[_payId].state) {
         mindTokenContract.transferFrom(payList[_payId].buyerAddress, payList[_payId].buyerAddress, 
-        payList[_payId].buyerAddress, productList[_productId].price);
+        payList[_payId].buyerAddress, payList[_payId].price);
         //payList[_payId].buyerAddress.transfer(payList[_payId].price);
         payList[_payId].state = State.Cancel;
         emit evtAdobt();
