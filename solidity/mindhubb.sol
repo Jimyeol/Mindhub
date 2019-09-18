@@ -5,6 +5,7 @@ pragma solidity ^0.5.0;
 contract MindHub {
     
     MindToken public mindTokenContract;
+    address payable public deployer;
 
     /*
     배송 상태 {구매완료, 배송중, 배송완료, 구매확정, 완료}
@@ -37,6 +38,7 @@ contract MindHub {
     */
     struct User {
         address account;
+        uint ableBalance;
         uint[] paymentArray;
         uint[] productArray;
         bool isSeller;
@@ -69,6 +71,7 @@ contract MindHub {
     
     constructor(MindToken _mindTokenContract) public {
         mindTokenContract = _mindTokenContract;
+        deployer = msg.sender;
         productId = 0;
         paymentId = 0;
     }
@@ -98,13 +101,21 @@ contract MindHub {
     */
     //물품 구매
     function _purchase_product(uint _productId) public payable {
-        require(productList[_productId].price == msg.value);
+        require(userList[msg.sender].ableBalance >= productList[_productId].price);
+        //require(productList[_productId].price == msg.value);
         userList[msg.sender].paymentArray.push(paymentId);
-        payList[paymentId].price = msg.value;
+        payList[paymentId].price = productList[_productId].price;
         payList[paymentId].sellerAddress = productList[_productId].seller_owner;
         payList[paymentId].buyerAddress = msg.sender;
         payList[paymentId].state = State.PurchaseCompletion;
         payList[paymentId].deliveryTime = now + officialDelveryTime;
+
+        //토큰으로 구매하는 부분
+        mindTokenContract.approve(msg.sender, msg.sender, 0);
+        mindTokenContract.increaseAllowance(msg.sender, msg.sender, price);
+        userList[msg.sender].ableBalance = 
+        (mindTokenContract.balanceOf(msg.sender) - productList[_productId].price);
+
         _add_payid();
         emit evtPurchaseProduct();
     }
@@ -117,7 +128,9 @@ contract MindHub {
     function _purchase_confirmation(uint _payId, uint _productId) public 
     isPurchaseCompletion(payList[_payId].state) {
         require(productList[_productId].seller_owner == payList[_payId].sellerAddress);
-        payList[_payId].sellerAddress.transfer(payList[_payId].price);
+        mindTokenContract.transferFrom(payList[_payId].buyerAddress, payList[_payId].buyerAddress, 
+        payList[_payId].sellerAddress, productList[_productId].price);
+        //payList[_payId].sellerAddress.transfer(payList[_payId].price);
         payList[_payId].state = State.Completion;
         emit evtPurchaseConfirmation();
     }
@@ -125,7 +138,9 @@ contract MindHub {
     //물품 결제 취소 (결제취소)
     function _adobt(uint _payId) public 
     isPurchaseCompletion(payList[_payId].state) {
-        payList[_payId].buyerAddress.transfer(payList[_payId].price);
+        mindTokenContract.transferFrom(payList[_payId].buyerAddress, payList[_payId].buyerAddress, 
+        payList[_payId].buyerAddress, productList[_productId].price);
+        //payList[_payId].buyerAddress.transfer(payList[_payId].price);
         payList[_payId].state = State.Cancel;
         emit evtAdobt();
     }
@@ -178,6 +193,10 @@ contract MindHub {
     /*
     ===========================토큰 구매 부분============================
     */
-    
-
+    //토큰 구매
+    //web에서 현금만큼만 구매할 수 있도록 제어 해줘야함.
+    function token_purchase(uint _value) public {
+        mindTokenContract.approve(deployer, msg.sender, _value);
+        mindTokenContract.transferFrom(deployer, msg.sender, msg.sender, _value);
+    }
 }

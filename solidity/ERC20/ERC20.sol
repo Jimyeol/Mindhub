@@ -78,8 +78,8 @@ contract ERC20 is Context, IERC20 {
      *
      * - `spender` cannot be the zero address.
      */
-    function approve(address spender, uint256 amount) public returns (bool) {
-        _approve(_msgSender(), spender, amount);
+    function approve(address caller, address spender, uint256 amount) public returns (bool) {
+        _approve(caller, spender, amount);
         return true;
     }
 
@@ -95,9 +95,9 @@ contract ERC20 is Context, IERC20 {
      * - the caller must have allowance for `sender`'s tokens of at least
      * `amount`.
      */
-    function transferFrom(address sender, address recipient, uint256 amount) public returns (bool) {
+    function transferFrom(address sender, address caller, address recipient, uint256 amount) public returns (bool) {
         _transfer(sender, recipient, amount);
-        _approve(sender, _msgSender(), _allowances[sender][_msgSender()].sub(amount, "ERC20: transfer amount exceeds allowance"));
+        _approve(sender, caller, _allowances[sender][caller].sub(amount, "ERC20: transfer amount exceeds allowance"));
         return true;
     }
 
@@ -113,8 +113,8 @@ contract ERC20 is Context, IERC20 {
      *
      * - `spender` cannot be the zero address.
      */
-    function increaseAllowance(address spender, uint256 addedValue) public returns (bool) {
-        _approve(_msgSender(), spender, _allowances[_msgSender()][spender].add(addedValue));
+    function increaseAllowance(address caller, address spender, uint256 addedValue) public returns (bool) {
+        _approve(caller, spender, _allowances[caller][spender].add(addedValue));
         return true;
     }
 
@@ -132,8 +132,8 @@ contract ERC20 is Context, IERC20 {
      * - `spender` must have allowance for the caller of at least
      * `subtractedValue`.
      */
-    function decreaseAllowance(address spender, uint256 subtractedValue) public returns (bool) {
-        _approve(_msgSender(), spender, _allowances[_msgSender()][spender].sub(subtractedValue, "ERC20: decreased allowance below zero"));
+    function decreaseAllowance(address caller, address spender, uint256 subtractedValue) public returns (bool) {
+        _approve(caller, spender, _allowances[caller][spender].sub(subtractedValue, "ERC20: decreased allowance below zero"));
         return true;
     }
 
