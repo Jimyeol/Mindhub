@@ -100,21 +100,21 @@ contract MindHub {
     ============================구매부분================================
     */
     //물품 구매
-    function _purchase_product(uint _productId) public payable {
-        require(userList[msg.sender].ableBalance >= productList[_productId].price);
+    function _purchase_product(address payable _buyerAddress, uint _productId) public payable {
+        require(userList[_buyerAddress].ableBalance >= productList[_productId].price);
         //require(productList[_productId].price == msg.value);
-        userList[msg.sender].paymentArray.push(paymentId);
+        userList[_buyerAddress].paymentArray.push(paymentId);
         payList[paymentId].price = productList[_productId].price;
         payList[paymentId].sellerAddress = productList[_productId].seller_owner;
-        payList[paymentId].buyerAddress = msg.sender;
+        payList[paymentId].buyerAddress = _buyerAddress;
         payList[paymentId].state = State.PurchaseCompletion;
         payList[paymentId].deliveryTime = now + officialDelveryTime;
 
         //토큰으로 구매하는 부분
-        mindTokenContract.approve(msg.sender, msg.sender, 0);
-        mindTokenContract.increaseAllowance(msg.sender, msg.sender, productList[_productId].price);
-        userList[msg.sender].ableBalance = 
-        (mindTokenContract.balanceOf(msg.sender) - productList[_productId].price);
+        mindTokenContract.approve(_buyerAddress, _buyerAddress, 0);
+        mindTokenContract.increaseAllowance(_buyerAddress, _buyerAddress, productList[_productId].price);
+        userList[_buyerAddress].ableBalance = 
+        (mindTokenContract.balanceOf(_buyerAddress) - productList[_productId].price);
 
         _add_payid();
         emit evtPurchaseProduct();
@@ -157,8 +157,8 @@ contract MindHub {
     /*
     ============================판매자 등록================================
     */
-    function _register_seller() public {
-        userList[msg.sender].isSeller = true;
+    function _register_seller(address _address) public {
+        userList[_address].isSeller = true;
         emit evtRegisterSeller();
     }
     
@@ -177,11 +177,11 @@ contract MindHub {
     ============================물품 등록================================
     */
     //판매 물품 등록
-    function _register_product(string memory _product_name, uint _price) public onlySeller(msg.sender) {
-        userList[msg.sender].productArray.push(productId);
+    function _register_product(address payable _sellerAddress, string memory _product_name, uint _price) public onlySeller(_sellerAddress) {
+        userList[_sellerAddress].productArray.push(productId);
         productList[productId].name = _product_name;
         productList[productId].price = _price;
-        productList[productId].seller_owner = msg.sender;
+        productList[productId].seller_owner = _sellerAddress;
         _add_productid();
         emit evtRegisterProduct();
     }
@@ -196,10 +196,10 @@ contract MindHub {
     */
     //토큰 구매
     //web에서 현금만큼만 구매할 수 있도록 제어 해줘야함.
-    function _token_purchase(uint _value) public {
-        mindTokenContract.approve(deployer, msg.sender, _value);
-        mindTokenContract.transferFrom(deployer, msg.sender, msg.sender, _value);
-        userList[msg.sender].ableBalance += _value;
+    function _token_purchase(address _buyerAddress, uint _value) public {
+        mindTokenContract.approve(deployer, _buyerAddress, _value);
+        mindTokenContract.transferFrom(deployer, _buyerAddress, _buyerAddress, _value);
+        userList[_buyerAddress].ableBalance += _value;
     }
 
 
@@ -207,7 +207,7 @@ contract MindHub {
     ===========================Balance get ============================
     */
 
-    function _get_ablebalance() public view returns (uint blanace) {
-        return userList[msg.sender].ableBalance;
+    function _get_ablebalance(address _buyerAddress) public view returns (uint blanace) {
+        return userList[_buyerAddress].ableBalance;
     }
 }
