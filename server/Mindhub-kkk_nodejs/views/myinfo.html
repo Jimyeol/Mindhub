@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>
+        MyInfo Page
+    </title>
+
+</head>
+
+<body>
+
+    <%- include ./topbar/topbar.html %>
+
+    <hr>
+    My Information <a href='/transactioninfo'>거래 내역 조회</a>
+    <p>
+        내 아이디 : <%= data.userData.userID %>
+    </p>
+    <p>
+        내 이름 : <%= data.userData.userName %>
+    </p>
+    <p>
+        성 별 : <% if (data.userData.userGen == 1) { %>
+        male
+        <% } else if (data.userData.userGen == 2) { %>
+        female
+        <% } %>
+    </p>
+    <p>
+        집 주소 : <%= data.userData.userAddr %>
+    </p>
+    <p>
+        전화번호 : <%= data.userData.userPN %>
+    </p>
+    <p>
+        내 월렛 주소 : <%= data.userData.userWallet %>
+    </p>
+    <p>
+        내 월렛 잔액 : <%= data.userData.userBalance %>
+    </p>
+    <!-- wallet Unlock 현재는 의미 없음 -->
+    <form>
+        Enter Wallet PW : <input type='text' name='walletPW' id='walletPW'></br>
+        <input type='button' value='unlock' onclick="unlockWallet()">
+    </form>
+
+    <% if(data.userData.userDN == 0) { %>
+    <a href='/myinfo_detail'>내 정보 수정</a>
+    <a href='/tobeseller'>판매자 등록</a>
+    <% } else if (data.userData.userDN == 1) { %>
+    <a href='/myshop'>내 상품</a>
+    <% } %>
+
+    <script>
+        async function unlockWallet() {
+            var walletpw = document.getElementById("walletPW").value;
+            try {
+                const response = fetch('http://localhost:3000/unlockwallet', {
+                    method: 'POST',
+                    headers: {
+                        "Content-Type": 'application/json'
+                    },
+                    body: JSON.stringify({ 'walletPW': walletpw })
+                })       
+            } catch(err) {
+
+            }
+        }
+    </script>
+
+</body>
+
+</html>
