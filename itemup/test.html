@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>Product Add</title>
+	<!-- Mobile Specific Metas -->
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+	<!-- Font-->
+	<link rel="stylesheet" type="text/css" href="../ohj/css/roboto-font.css">
+	<link rel="stylesheet" type="text/css" href="../ohj/fonts/font-awesome-5/css/fontawesome-all.min.css">
+	<!-- Main Style Css -->
+    <link rel="stylesheet" href="../ohj/css/style.css"/>
+</head>
+<body>
+	<% include ../topbar/topbar.html %>
+	
+<div class="container1-page">
+	<div class="page-content">
+		<div class="form-v5-content">
+			<form class="form-detail" action="../ohj/itemregister1" method="post">
+				<h2>상품을 등록해주세요</h2>
+	
+
+				<div class="form-row">
+					<label>상품명</label>
+					<input type="text" name="item_name" id="name" class="input-text" placeholder="상품명">
+				</div>
+				<div class="form-row">
+					<label>상품가격</label>
+					<input type="text" name="item_price" id="price" class="input-text" placeholder="상품가격" >
+					
+				</div>
+				<div class="form-row">
+					<label>상품정보</label>
+					<input type="text" name="item_info" id="info" class="input-text" placeholder="상품정보">
+					
+				</div>
+				<div class="form-row">
+					<label>상품이미지</label>
+					<form action="/upload/create" method="post" enctype="multipart/form-data">
+						<input type="file" name="imgFile" id="upload">
+						<div id='preview'>
+								<!-- 미리보기 공간 -->
+						</div>
+					</form>
+				</div>
+				<div class="form-row">
+					&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp<input type="submit" value="확인"><br><br>
+				</div>
+			</form>
+		</div>
+	</div>
+</div>
+</body>
+
+<script>
+		var upload = document.querySelector('#upload');
+		var preview = document.querySelector('#preview');
+	 
+		upload.addEventListener('change',function (e) {
+			var get_file = e.target.files;
+	 
+			var image = document.createElement('img');
+	 
+			var reader = new FileReader();
+
+			reader.onload = (function (aImg) {
+				console.log(1);
+	 
+				return function (e) {
+					console.log(3);
+
+					aImg.src = e.target.result
+				}
+			})(image)
+	 
+			if(get_file){
+
+				reader.readAsDataURL(get_file[0]);
+				console.log(2);
+			}
+	 
+			preview.appendChild(image);
+		})
+	</script>
+	
+</html>
