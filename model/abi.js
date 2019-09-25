@@ -6,6 +6,24 @@ const abi = [
 		"constant": false,
 		"inputs": [
 			{
+				"name": "_seller",
+				"type": "address"
+			},
+			{
+				"name": "balance",
+				"type": "uint256"
+			}
+		],
+		"name": "_add_ablebalance",
+		"outputs": [],
+		"payable": false,
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"constant": false,
+		"inputs": [
+			{
 				"name": "_payId",
 				"type": "uint256"
 			}

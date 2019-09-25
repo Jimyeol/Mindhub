@@ -71,7 +71,7 @@ class Item {
     selectAllItem() {
         return new Promise(
             async (resolve, reject) => {
-                const sql = 'SELECT * FROM item';
+                const sql = 'SELECT * FROM item ORDER BY item_code DESC';
                 try {
                     var result = await myConnection.query(sql);
                     resolve(result)
@@ -311,7 +311,7 @@ class Item {
     deleteItemFromSolditem(data) {
         return new Promise(
             async (resolve, reject) => {
-                console.log('id : ' + data.data + ' deleting');
+                console.log('id : ' + data.data+ ' deleting');
                 const sql = 'DELETE FROM solditem WHERE id = ?';
                 try {
                     await myConnection.query(sql, [data.data]);
@@ -332,6 +332,19 @@ class Item {
                     resolve(0);
                 } catch (err) {
                     reject('UpItemRank Err ', err);
+                }
+            }
+        )
+    }
+    selectAllCount() {
+        return new Promise(
+            async (resolve, reject) => {
+                const sql = 'SELECT count(*) as cnt FROM item';
+                try {
+                    var result = await myConnection.query(sql);
+                    resolve(result)
+                } catch (err) {
+                    reject(err);
                 }
             }
         )

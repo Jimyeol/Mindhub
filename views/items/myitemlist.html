@@ -1,33 +1,125 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>My Item List</title>
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css"
+        integrity="sha512-dTfge/zgoMYpP7QbHy4gWMEGsbsdZeCXz7irItjcC3sPUFtf0kuFbDz/ixG7ArTxmDjLXDmezHubeNikyKGVyQ=="
+        crossorigin="anonymous">
+    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="../../ohj/css/itemlist.css">
+    <!--===============================================================================================-->
+	<link rel="icon" type="image/png" href="../PGJ/images/icons/favicon.png"/>
+    <!--===============================================================================================-->
+        <link rel="stylesheet" type="text/css" href="../PGJ/vendor/bootstrap/css/bootstrap.min.css">
+    <!--===============================================================================================-->
+        <link rel="stylesheet" type="text/css" href="../PGJ/fonts/font-awesome-4.7.0/css/font-awesome.min.css">
+    <!--===============================================================================================-->
+        <link rel="stylesheet" type="text/css" href="../PGJ/fonts/themify/themify-icons.css">
+    <!--===============================================================================================-->
+        <link rel="stylesheet" type="text/css" href="../PGJ/fonts/Linearicons-Free-v1.0.0/icon-font.min.css">
+    <!--===============================================================================================-->
+        <link rel="stylesheet" type="text/css" href="../PGJ/fonts/elegant-font/html-css/style.css">
+    <!--===============================================================================================-->
+        <link rel="stylesheet" type="text/css" href="../PGJ/vendor/animate/animate.css">
+    <!--===============================================================================================-->
+        <link rel="stylesheet" type="text/css" href="../PGJ/vendor/css-hamburgers/hamburgers.min.css">
+    <!--===============================================================================================-->
+        <link rel="stylesheet" type="text/css" href="../PGJ/vendor/animsition/css/animsition.min.css">
+    <!--===============================================================================================-->
+        <link rel="stylesheet" type="text/css" href="../PGJ/vendor/select2/select2.min.css">
+    <!--===============================================================================================-->
+        <link rel="stylesheet" type="text/css" href="../PGJ/vendor/slick/slick.css">
+    <!--===============================================================================================-->
+        <link rel="stylesheet" type="text/css" href="../PGJ/vendor/noui/nouislider.min.css">
+    <!--===============================================================================================-->
+        <link rel="stylesheet" type="text/css" href="../PGJ/css/util.css">
+        <link rel="stylesheet" type="text/css" href="../PGJ/css/main.css">
+    <!--===============================================================================================-->
+
 </head>
 
 <body>
-    <% include ../topbar/topbar.html %>
-    <div class="container1-page">
-        <p>
-            <%= data.userData.userID %> 님이 판매중인 상품 List 입니다
-        </p>
-        <hr>
+    <% include ../topbar/topbar.html %> 
+    <!-- Header -->
+	<header class="header1">
+            <!-- Header desktop -->
+                <div class="wrap_header">
+                    <!-- Logo -->
+                    <a href="index.html" class="logo">
+                        <img src="../PGJ/images/icons/logo.png" alt="IMG-LOGO">
+                    </a>
+                </div>
+    </header>
 
-        <form method='post' action='/editmyitem'>
-            <% for(var i = 0; i < data.itemData.length; i++) { %>
-            <p><p>
-                #<%=i+1%> <img src='../../ohj/images/itemimages/<%= data.itemData[i].item_img %>' style="width:100px; heigth: 100px">
-
-                <%= data.itemData[i].item_name %> <%= data.itemData[i].item_price %>
-            </p>
-                <button type='submit' name='data' value='<%= JSON.stringify(data.itemData[i]) %>'>수정</button>
-            </p>
+    <!-- Blog -->
+    <section class="blog bgwhite p-b-65">
+            <div class="container">
+               <div class="sec-title p-b-52">
+                  <h3 class="m-text5 t-center">
+                        <%= data.userData.userID %> 님이 판매중인 상품 List 입니다
+                  </h3>
+               </div>
+               <form method='post' action='/editmyitem'>
+                <% for(var i = 0; i < data.itemData.length; i++) { %>
+                <div class="row">
+                  <div class="col-sm-10 col-md-4 p-b-30 m-l-r-auto">
+                     <!-- Block3 -->
+                     <div class="block3">
+                            <div class="block3-img dis-block hov-img-zoom">
+									<img src="../../ohj/images/itemimages/<%= data.itemData[i].item_img %>" alt="IMG-BLOG" >
+								</div>
+   
+                        <div class="block3-txt p-t-14">
+                           <h4 class="p-b-7">
+                              <button type='submit' name='data' class="m-text11"
+                                        value='<%= JSON.stringify(data.itemData[i]) %>'>#<%=i+1%> <%= data.itemData[i].item_name %></button>
+                           </h4>
+                           <span class="s-text7"><%= data.itemData[i].item_price %> MDT</span> 
+                        </div>
+                     </div>
+                  </div>
+               </div>
+            </div>
             <% } %>
-        </form>
+            </form>
+         </section>
+            </div>
+
+        </div>
+
+
+
     </div>
+    </div>
+
+    <!-- Container Selection -->
+    <div id="dropDownSelect1"></div>
+    <div id="dropDownSelect2"></div>
+
+
+    <!--===============================================================================================-->
+    <script type="text/javascript" src="../PGJ/vendor/jquery/jquery-3.2.1.min.js"></script>
+    <!--===============================================================================================-->
+    <script type="text/javascript" src="../PGJ/vendor/animsition/js/animsition.min.js"></script>
+    <!--===============================================================================================-->
+    <script type="text/javascript" src="../PGJ/vendor/bootstrap/js/popper.js"></script>
+    <script type="text/javascript" src="../PGJ/vendor/bootstrap/js/bootstrap.min.js"></script>
+    <!--===============================================================================================-->
+    <script type="text/javascript" src="../PGJ/vendor/select2/select2.min.js"></script>
+    <script type="text/javascript">
+        $(".selection-1").select2({
+            minimumResultsForSearch: 20,
+            dropdownParent: $('#dropDownSelect1')
+        });
+
+        $(".selection-2").select2({
+            minimumResultsForSearch: 20,
+            dropdownParent: $('#dropDownSelect2')
+        });
+    </script>
+    <!--===============================================================================================-->
+    <script src="../PGJ/js/main.js"></script>
 </body>
 
 </html>

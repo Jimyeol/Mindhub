@@ -31,14 +31,37 @@ dataRouter.post('/itemregister', async (req, res) => {
     }
 });
 
-dataRouter.get('/shop', async (req, res) => {
+dataRouter.get('/shop/:cur', async (req, res) => {
     try {
+        //몇개까지 출력할것인가
+        var page_list_size = 9;
+        var totalPageCount = 0;
+
         var cateResult = await dataModel.categorySelect();
         var dataResult = await dataModel.selectAllItem();
+        var countData = await dataModel.selectAllCount();
+        
+        //물품 갯수
+        var totalPageCount = countData[0][0].cnt;
+
+        //현재 페이지
+        var curPage = req.params.cur;
+
+        //전체 페이지 갯수
+        if (totalPageCount < 0) {
+            totalPageCount = 0
+        }
+        var pasingResult = {
+            "totalPageCount": totalPageCount,
+            "curPage": curPage,
+            "page_list_size": page_list_size,
+        };
+
         data = {
             userData: req.session.user,
             itemData: dataResult[0],
-            cateData: cateResult[0]
+            cateData: cateResult[0],
+            pasing: pasingResult
         }
         res.render('items/shop.html', { data: data });
     } catch (err) {
@@ -56,8 +79,14 @@ dataRouter.post('/shop_sub', async (req, res) => {
     }
 });
 
+// dataRouter.get('/item_detail', (req, res) => {
+//     console.log(req.body);
+//     res.redirect('items/showitem_detail');
+// });
+
 dataRouter.post('/item_detail', async (req, res) => {
     try {
+        console.log('item_detail', req.body);
         var itemData = JSON.parse(req.body.data);
 
         var itemCode = itemData.item_code;
@@ -112,6 +141,7 @@ dataRouter.post('/editmyitem', (req, res) => {
         res.render('items/myitemedit.html', {data:data})
 });
 
+
 dataRouter.post('/submitcomment', async (req, res) => {
     try{
         console.log('/submitComment', req.body);
@@ -128,7 +158,7 @@ dataRouter.post('/submitcomment', async (req, res) => {
             //result = 0 문제 없이 solditem status 변경
             res.status(200).send(true);
         } else {
-            res.redirect('/item_detail');
+            res.redirect('/');
         }
     } catch (err) {
         console.log('submitcomment router Err', err);

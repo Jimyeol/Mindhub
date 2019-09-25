@@ -95,14 +95,15 @@ class web3js {
                             tx: txData,
                             user: data.userData.userID,
                             itemS: data.itemData.user,
+                            itemI: data.itemData.item_img,
                             itemP: data.itemData.item_price,
                             itemC: data.itemData.item_code,
                             itemN: data.itemData.item_name,
                         }
 
                         console.log('data.tx', data.tx);
-                        const sql = 'INSERT INTO solditem (user, seller, item_name, item_price, blocknum, tx, item_code) values (?, ?, ?, ?, ?, ?, ?)';
-                        await myConnection.query(sql, [data.user, data.itemS, data.itemN, data.itemP, data.blockNum, data.tx, data.itemC]);
+                        const sql = 'INSERT INTO solditem (user, seller,item_img, item_name, item_price, blocknum, tx, item_code) values (?, ?, ?,  ?, ?, ?, ?, ?)';
+                        await myConnection.query(sql, [data.user, data.itemS,data.itemI, data.itemN, data.itemP, data.blockNum, data.tx, data.itemC]);
                     } else {
                         console.log('Get Block Number Fail');
                     }
@@ -118,6 +119,7 @@ class web3js {
         return new Promise(
             async (resolve, reject) => {
                 try {
+                    console.log('unlockpw', data);
                     var result = await web3.eth.personal.unlockAccount(data.walletAddr, data.walletPW, 15000);
                     resolve(result);
                 } catch (err) {

@@ -86,7 +86,7 @@ tokenRouter.post('/contract', async (req, res) => {
 
 //wallet Unlock 현재는 의미 없음
 tokenRouter.post('/unlockwallet', async (req, res) => {
-    console.log(req.body.walletPW);
+    console.log('unlockRouter', req.body.walletPW);
     try {
         data = {
             walletPW: req.body.walletPW,

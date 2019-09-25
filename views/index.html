@@ -2,7 +2,7 @@
 <html lang="en">
 
 <head>
-   <title>Home 03</title>
+   <title>MIND MADE</title>
    <meta charset="UTF-8">
    <meta name="viewport" content="width=device-width, initial-scale=1">
    <!--===============================================================================================-->
@@ -38,7 +38,6 @@
 </head>
 
 <body class="animsition">
-
    <!-- Header -->
    <header class="header3">
       <!-- Header desktop -->
@@ -66,85 +65,10 @@
                   <% if(data.userData) { %>
                   <img src="../PGJ/images/icons/icon-header-02.png" class="header-icon1 js-show-header-dropdown"
                      alt="ICON">
-                  <span class="header-icons-noti">0</span>
                   <% } else { %>
                   <img id='noData-0' src="../PGJ/images/icons/icon-header-02.png" class="header-icon1" alt="ICON"
                      onclick="noDataAlert()">
                   <% }%>
-
-
-                  <!-- Header cart noti -->
-                  <div class="header-cart header-dropdown">
-                     <ul class="header-cart-wrapitem">
-                        <li class="header-cart-item">
-                           <div class="header-cart-item-img">
-                              <img src="../PGJ/images/item-cart-01.jpg" alt="IMG">
-                           </div>
-
-                           <div class="header-cart-item-txt">
-                              <a href="#" class="header-cart-item-name">
-                                 White Shirt With Pleat Detail Back
-                              </a>
-
-                              <span class="header-cart-item-info">
-                                 1 x $19.00
-                              </span>
-                           </div>
-                        </li>
-
-                        <li class="header-cart-item">
-                           <div class="header-cart-item-img">
-                              <img src="../PGJ/images/item-cart-02.jpg" alt="IMG">
-                           </div>
-
-                           <div class="header-cart-item-txt">
-                              <a href="#" class="header-cart-item-name">
-                                 Converse All Star Hi Black Canvas
-                              </a>
-
-                              <span class="header-cart-item-info">
-                                 1 x $39.00
-                              </span>
-                           </div>
-                        </li>
-
-                        <li class="header-cart-item">
-                           <div class="header-cart-item-img">
-                              <img src="../PGJ/images/item-cart-03.jpg" alt="IMG">
-                           </div>
-
-                           <div class="header-cart-item-txt">
-                              <a href="#" class="header-cart-item-name">
-                                 Nixon Porter Leather Watch In Tan
-                              </a>
-
-                              <span class="header-cart-item-info">
-                                 1 x $17.00
-                              </span>
-                           </div>
-                        </li>
-                     </ul>
-
-                     <div class="header-cart-total">
-                        Total: $75.00
-                     </div>
-
-                     <div class="header-cart-buttons">
-                        <div class="header-cart-wrapbtn">
-                           <!-- Button -->
-                           <a href="cart.html" class="flex-c-m size1 bg1 bo-rad-20 hov1 s-text1 trans-0-4">
-                              View Cart
-                           </a>
-                        </div>
-
-                        <div class="header-cart-wrapbtn">
-                           <!-- Button -->
-                           <a href="#" class="flex-c-m size1 bg1 bo-rad-20 hov1 s-text1 trans-0-4">
-                              Check Out
-                           </a>
-                        </div>
-                     </div>
-                  </div>
                </div>
             </div>
 
@@ -152,11 +76,11 @@
             <div class="wrap_menu">
                <nav class="menu">
                   <ul class="main_menu">
-                     <li>
+                     <li class="sale-noti">
                         <a href="/">Home</a>
                      </li>
-                     <li class="sale-noti">
-                        <a href="/shop">Shop</a>
+                     <li>
+                        <a href="/shop/1">Shop</a>
                      </li>
                      <% if(!data.userData) { %>
                      <li>
@@ -174,7 +98,7 @@
                         <a href="/itemup">Itemup</a>
                      </li>
                      <li>
-                        <a href="/myinfo">MYINFO</a>
+                        <a href="/myinfo">MyInfo</a>
                      </li>
                      <li>
                         <a href="/logout">LOGOUT</a>
@@ -184,7 +108,7 @@
                         <a href="/sellerconfirm">Sellerconfirm</a>
                      </li>
                      <li>
-                        <a href="/myinfo">MYINFO</a>
+                        <a href="/myinfo">MyInfo</a>
                      </li>
                      <li>
                         <a href="/logout">LOGOUT</a>
@@ -194,7 +118,7 @@
                         <a href="/buytoken">Token</a>
                      </li>
                      <li>
-                        <a href="/myinfo">MYINFO</a>
+                        <a href="/myinfo">MyInfo</a>
                      </li>
                      <li>
                         <a href="/logout">LOGOUT</a>
@@ -236,79 +160,6 @@
                <div class="header-wrapicon2">
                   <img src="../PGJ/images/icons/icon-header-02.png" class="header-icon1 js-show-header-dropdown"
                      alt="ICON">
-                  <span class="header-icons-noti">0</span>
-
-                  <!-- Header cart noti -->
-                  <div class="header-cart header-dropdown">
-                     <ul class="header-cart-wrapitem">
-                        <li class="header-cart-item">
-                           <div class="header-cart-item-img">
-                              <img src="../PGJ/images/item-cart-01.jpg" alt="IMG">
-                           </div>
-
-                           <div class="header-cart-item-txt">
-                              <a href="#" class="header-cart-item-name">
-                                 White Shirt With Pleat Detail Back
-                              </a>
-
-                              <span class="header-cart-item-info">
-                                 1 x $19.00
-                              </span>
-                           </div>
-                        </li>
-
-                        <li class="header-cart-item">
-                           <div class="header-cart-item-img">
-                              <img src="../PGJ/images/item-cart-02.jpg" alt="IMG">
-                           </div>
-
-                           <div class="header-cart-item-txt">
-                              <a href="#" class="header-cart-item-name">
-                                 Converse All Star Hi Black Canvas
-                              </a>
-
-                              <span class="header-cart-item-info">
-                                 1 x $39.00
-                              </span>
-                           </div>
-                        </li>
-
-                        <li class="header-cart-item">
-                           <div class="header-cart-item-img">
-                              <img src="../PGJ/images/item-cart-03.jpg" alt="IMG">
-                           </div>
-
-                           <div class="header-cart-item-txt">
-                              <a href="#" class="header-cart-item-name">
-                                 Nixon Porter Leather Watch In Tan
-                              </a>
-
-                              <span class="header-cart-item-info">
-                                 1 x $17.00
-                              </span>
-                           </div>
-                        </li>
-                     </ul>
-
-                     <div class="header-cart-total">
-                        Total: $75.00
-                     </div>
-
-                     <div class="header-cart-buttons">
-                        <div class="header-cart-wrapbtn">
-                           <!-- Button -->
-                           <a href="cart.html" class="flex-c-m size1 bg1 bo-rad-20 hov1 s-text1 trans-0-4">
-                              View Cart
-                           </a>
-                        </div>
-
-                        <div class="header-cart-wrapbtn">
-                           <!-- Button -->
-                           <a href="#" class="flex-c-m size1 bg1 bo-rad-20 hov1 s-text1 trans-0-4">
-                              Check Out
-                           </a>
-                        </div>
-                     </div>
                   </div>
                </div>
             </div>
@@ -337,7 +188,7 @@
                   <a href="/">Home</a>
                </li>
                <li class="item-menu-mobile">
-                  <a href="/shop">Shop</a>
+                  <a href="/shop/1">Shop</a>
                </li>
                <% if(!data.userData) { %>
                <li class="item-menu-mobile">
@@ -355,7 +206,7 @@
                   <a href="/itemup">Itemup</a>
                </li>
                <li class="item-menu-mobile">
-                  <a href="/myinfo">MYINFO</a>
+                  <a href="/myinfo">MyInfo</a>
                </li>
                <li class="item-menu-mobile">
                   <a href="/logout">LOGOUT</a>
@@ -365,7 +216,7 @@
                   <a href="/sellerconfirm">Sellerconfirm</a>
                </li>
                <li class="item-menu-mobile">
-                  <a href="/myinfo">MYINFO</a>
+                  <a href="/myinfo">MyInfo</a>
                </li>
                <li class="item-menu-mobile">
                   <a href="/logout">LOGOUT</a>
@@ -375,7 +226,7 @@
                   <a href="/buytoken">Token</a>
                </li>
                <li class="item-menu-mobile">
-                  <a href="/myinfo">MYINFO</a>
+                  <a href="/myinfo">MyInfo</a>
                </li>
                <li class="item-menu-mobile">
                   <a href="/logout">LOGOUT</a>
@@ -427,7 +278,7 @@
 
                      <div class="wrap-btn-slide1 w-size1 animated visible-false" data-appear="rotateIn">
                         <!-- Button -->
-                        <a href="/shop" class="flex-c-m size2 bo-rad-23 s-text2 bgwhite hov1 trans-0-4">
+                        <a href="/shop/1" class="flex-c-m size2 bo-rad-23 s-text2 bgwhite hov1 trans-0-4">
                            Shop Now
                         </a>
                      </div>
@@ -484,7 +335,7 @@
             <!-- Slide2 -->
             <div class="wrap-slick2 rs1-slick2">
                <div class="slick2">
-                  <% if(!data.userData) { %>
+                  <% if(data.recentItemCode == null) { %>
                   No Data
                   <% } else { %>
                   <% for(var i=0; i<data.recentItemCode.length; i++) { %>
@@ -492,8 +343,7 @@
                      <!-- Block2 -->
                      <div class="block2">
                         <div class="block2-img wrap-pic-w of-hidden pos-relative block2-labelnew">
-                           <img src="../PGJ/images/itemimages/<%= data.recentItemCode[i].item_img %>" alt="IMG-PRODUCT"
-                              style="width:100px;height:100px;">
+                           <img src="../PGJ/images/itemimages/<%= data.recentItemCode[i].item_img %>" alt="IMG-PRODUCT">
                            <div class="block2-overlay trans-0-4">
                               <a href="#" class="block2-btn-addwishlist hov-pointer trans-0-4">
                                  <i class="icon-wishlist icon_heart_alt" aria-hidden="true"></i>
@@ -515,7 +365,7 @@
                            </a>
 
                            <span class="block2-price m-text6 p-r-5">
-                              <%= data.recentItemCode[i].item_price %> MDT MDT
+                              <%= data.recentItemCode[i].item_price %> MDT
                            </span>
                         </div>
                      </div>
@@ -541,8 +391,7 @@
 
                      <div class="ab-t-l sizefull flex-col-c-b p-l-15 p-r-15 p-b-20">
                         <div class="t-center">
-                           <% if(data.bestCode == null) { %>
-
+                           <% if(data.bestCode[0] != null) { %>
                            <a href="product-detail.html" class="dis-block s-text3 p-b-5">
                               <%= data.bestCode[0].item_name %>
                            </a>
@@ -590,13 +439,12 @@
                   <div class="tab-pane fade show active" id="best-seller" role="tabpanel">
                      <div class="row">
                         <% if(data.topItemCode) { %>
-                        <% for(var i=0; i<data.topItemCode.length;i++) { %>
+                           <% for(var i=0; i<data.topItemCode.length; i++) { %>
                         <div class="col-sm-6 col-md-4 col-lg-3 p-b-50">
                            <!-- Block2 -->
                            <div class="block2">
                               <div class="block2-img wrap-pic-w of-hidden pos-relative">
-                                 <img src="../PGJ/images/itemimages/<%= data.topItemCode[i].item_img %>"
-                                    alt="IMG-PRODUCT" style="width: 100px; height:100px">
+                                 <img src="../PGJ/images/itemimages/<%= data.topItemCode[i].item_img %>" alt="IMG-PRODUCT">
 
                                  <div class="block2-overlay trans-0-4">
                                     <a href="#" class="block2-btn-addwishlist hov-pointer trans-0-4">
@@ -626,45 +474,46 @@
                         <% } else { %>
                         Waiting For Top Item
                         <% } %>
+                     </div>
+                  </div>
 
                         <!--  -->
                         <div class="tab-pane fade" id="low-price" role="tabpanel">
                            <div class="row">
                               <% if(data.lowPriceCode) { %>
                               <% for(var i=0; i<data.lowPriceCode.length;i++) { %>
-                              <div class="col-sm-6 col-md-4 col-lg-3 p-b-50">
-                                 <!-- Block2 -->
-                                 <div class="block2">
-                                    <div class="block2-img wrap-pic-w of-hidden pos-relative">
-                                       <img src="../PGJ/images/itemimages/<%= data.lowPriceCode[i].item_img %>"
-                                          alt="IMG-PRODUCT" style="width: 100px; height:100px">
-
-                                       <div class="block2-overlay trans-0-4">
-                                          <a href="#" class="block2-btn-addwishlist hov-pointer trans-0-4">
-                                             <i class="icon-wishlist icon_heart_alt" aria-hidden="true"></i>
-                                             <i class="icon-wishlist icon_heart dis-none" aria-hidden="true"></i>
-                                          </a>
-
-                                          <div class="block2-btn-addcart w-size1 trans-0-4">
-                                             <!-- Button -->
-                                             <button class="flex-c-m size1 bg4 bo-rad-23 hov1 s-text1 trans-0-4">
-                                                Add to Cart
-                                             </button>
+                                    <div class="col-sm-6 col-md-4 col-lg-3 p-b-50">
+                                          <!-- Block2 -->
+                                          <div class="block2">
+                                             <div class="block2-img wrap-pic-w of-hidden pos-relative">
+                                                <img src="../PGJ/media/itemimages/<%= data.lowPriceCode[i].item_img %>" alt="IMG-PRODUCT">
+                  
+                                                <div class="block2-overlay trans-0-4">
+                                                   <a href="#" class="block2-btn-addwishlist hov-pointer trans-0-4">
+                                                      <i class="icon-wishlist icon_heart_alt" aria-hidden="true"></i>
+                                                      <i class="icon-wishlist icon_heart dis-none" aria-hidden="true"></i>
+                                                   </a>
+                  
+                                                   <div class="block2-btn-addcart w-size1 trans-0-4">
+                                                      <!-- Button -->
+                                                      <button class="flex-c-m size1 bg4 bo-rad-23 hov1 s-text1 trans-0-4">
+                                                         Add to Cart
+                                                      </button>
+                                                   </div>
+                                                </div>
+                                             </div>
+                  
+                                             <div class="block2-txt p-t-20">
+                                                <a href="product-detail.html" class="block2-name dis-block s-text3 p-b-5">
+                                                   <%= data.lowPriceCode[i].item_name %>
+                                                </a>
+                  
+                                                <span class="block2-price m-text6 p-r-5">
+                                                   <%= data.lowPriceCode[i].item_price%> MDT
+                                                </span>
+                                             </div>
                                           </div>
                                        </div>
-                                    </div>
-
-                                    <div class="block2-txt p-t-20">
-                                       <a href="product-detail.html" class="block2-name dis-block s-text3 p-b-5">
-                                          <%= data.lowPriceCode[i].item_name %>
-                                       </a>
-
-                                       <span class="block2-price m-text6 p-r-5">
-                                          <%= data.lowPriceCode[i].item_price%> MDT
-                                       </span>
-                                    </div>
-                                 </div>
-                              </div>
                               <% } %>
                               <% } else { %>
                               Waiting For Top Item
@@ -787,27 +636,33 @@
                <ul>
                   <li class="p-b-9">
                      <a href="#" class="s-text7">
-                        Men
+                        Toy
                      </a>
                   </li>
 
                   <li class="p-b-9">
                      <a href="#" class="s-text7">
-                        Women
+                        Furniture
                      </a>
                   </li>
 
                   <li class="p-b-9">
                      <a href="#" class="s-text7">
-                        Dresses
+                        Jewelry
                      </a>
                   </li>
 
                   <li class="p-b-9">
                      <a href="#" class="s-text7">
-                        Sunglasses
+                        Accessory
                      </a>
                   </li>
+
+                  <li class="p-b-9">
+                        <a href="#" class="s-text7">
+                           Food
+                        </a>
+                     </li>
                </ul>
             </div>
 
