@@ -147,6 +147,7 @@ contract MindHub {
         mindTokenContract.transferFrom(payList[_payId].buyerAddress, payList[_payId].buyerAddress, 
         payList[_payId].sellerAddress, payList[_payId].price);
         payList[_payId].state = State.Completion;
+        userList[payList[_payId].sellerAddress].ableBalance += payList[_payId].price;
         emit evtPurchaseConfirmation();
     }
     
