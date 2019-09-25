@@ -415,10 +415,13 @@
                      <tr class="table-row">
                         <td class="column-1">
                            <div class="cart-img-product b-rad-4 o-f-hidden">
+
                               <img src="../PGJ/images/itemimages/<%= data.solditemData[i].item_img %>"
                                  alt="IMG-PRODUCT">
+
                            </div>
                         </td>
+                        <%= console.log(data.solditemData) %>
                         <td class="column-2"><%= data.solditemData[i].item_name %></td>
                         <td class="column-3"><%= data.solditemData[i].item_price %></td>
                         <td class="column-4">
@@ -688,7 +691,8 @@
                   "Content-Type": 'application/json'
                },
                body: JSON.stringify({ data, confirm })
-            })
+            });
+            location.reload(true);
          } catch (err) {
             console.log('abortion Err : ', err);
          }
@@ -706,13 +710,7 @@
                body: JSON.stringify({ data, confirm })
             });
             console.log('jqueryData', data);
-            $(`#${data}`).click(() => {
-               window.alert(`#${data}`);
-               $(`#${data}`).removeClass('bg9');
-               $(`#${data}`).addClass('bg1');
-               $(`#${data}`).empty();
-               $(`#${data}`).append('complete');
-            })
+            location.reload(true);
          } catch (err) {
             console.log('purchaseConfirm Err : ', err);
          }

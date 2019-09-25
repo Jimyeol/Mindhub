@@ -208,7 +208,7 @@ userRouter.get('/transactioninfo', async (req, res) => {
         var result = await userModel.CallBoughtItemData(req.session.user.userID);
         data = {
             userData: req.session.user,
-            solditemData: result[0]
+            solditemData: result[0],
         }
         res.render('items/transactioninfo.html', { data: data });
     } catch (err) {
