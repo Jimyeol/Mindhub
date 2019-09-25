@@ -1,0 +1,635 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+   <title>MIND MADE</title>
+   <meta charset="UTF-8">
+   <meta name="viewport" content="width=device-width, initial-scale=1">
+   <!--===============================================================================================-->	
+	<link rel="icon" type="image/png" href="../ohj/images/icons/favicon.ico"/>
+	<!--===============================================================================================-->
+		<link rel="stylesheet" type="text/css" href="../ohj/vendor/bootstrap/css/bootstrap.min.css">
+	<!--===============================================================================================-->
+		<link rel="stylesheet" type="text/css" href="../ohj/fonts/font-awesome-4.7.0/css/font-awesome.min.css">
+	<!--===============================================================================================-->
+		<link rel="stylesheet" type="text/css" href="../ohj/fonts/iconic/css/material-design-iconic-font.min.css">
+	<!--===============================================================================================-->
+		<link rel="stylesheet" type="text/css" href="../ohj/vendor/animate/animate.css">
+	<!--===============================================================================================-->	
+		<link rel="stylesheet" type="text/css" href="../ohj/vendor/css-hamburgers/hamburgers.min.css">
+	<!--===============================================================================================-->
+		<link rel="stylesheet" type="text/css" href="../ohj/vendor/animsition/css/animsition.min.css">
+	<!--===============================================================================================-->
+		<link rel="stylesheet" type="text/css" href="../ohj/vendor/select2/select2.min.css">
+	<!--===============================================================================================-->	
+		<link rel="stylesheet" type="text/css" href="../ohj/vendor/daterangepicker/daterangepicker.css">
+	<!--===============================================================================================-->
+		<link rel="stylesheet" type="text/css" href="../ohj/css/util.css">
+		<link rel="stylesheet" type="text/css" href="../ohj/css/main.css">
+	<!--===============================================================================================-->
+	<!--===============================================================================================-->
+	<link rel="icon" type="image/png" href="../PGJ/images/icons/favicon.png"/>
+	<!--===============================================================================================-->
+	   <link rel="stylesheet" type="text/css" href="../PGJ/vendor/bootstrap/css/bootstrap.min.css">
+	<!--===============================================================================================-->
+	   <link rel="stylesheet" type="text/css" href="../PGJ/fonts/font-awesome-4.7.0/css/font-awesome.min.css">
+	<!--===============================================================================================-->
+	   <link rel="stylesheet" type="text/css" href="../PGJ/fonts/themify/themify-icons.css">
+	<!--===============================================================================================-->
+	   <link rel="stylesheet" type="text/css" href="../PGJ/fonts/Linearicons-Free-v1.0.0/icon-font.min.css">
+	<!--===============================================================================================-->
+	   <link rel="stylesheet" type="text/css" href="../PGJ/fonts/elegant-font/html-css/style.css">
+	<!--===============================================================================================-->
+	   <link rel="stylesheet" type="text/css" href="../PGJ/vendor/animate/animate.css">
+	<!--===============================================================================================-->
+	   <link rel="stylesheet" type="text/css" href="../PGJ/vendor/css-hamburgers/hamburgers.min.css">
+	<!--===============================================================================================-->
+	   <link rel="stylesheet" type="text/css" href="../PGJ/vendor/animsition/css/animsition.min.css">
+	<!--===============================================================================================-->
+	   <link rel="stylesheet" type="text/css" href="../PGJ/vendor/select2/select2.min.css">
+	<!--===============================================================================================-->
+	   <link rel="stylesheet" type="text/css" href="../PGJ/vendor/daterangepicker/daterangepicker.css">
+	<!--===============================================================================================-->
+	   <link rel="stylesheet" type="text/css" href="../PGJ/vendor/slick/slick.css">
+	<!--===============================================================================================-->
+	   <link rel="stylesheet" type="text/css" href="../PGJ/vendor/lightbox2/css/lightbox.min.css">
+	<!--===============================================================================================-->
+	   <link rel="stylesheet" type="text/css" href="../PGJ/css/util.css">
+	   <link rel="stylesheet" type="text/css" href="../PGJ/css/main.css">
+	<!--===============================================================================================-->
+</head>
+
+<body class="animsition">
+   <!-- Header -->
+   <header class="header3">
+      <!-- Header desktop -->
+      <div class="container-menu-header-v3">
+         <div class="wrap_header3 p-t-74">
+            <!-- Logo -->
+            <a href="" class="logo3">
+               <img src="../PGJ/images/icons/logo.png" alt="IMG-LOGO">
+            </a>
+            <!-- Header Icon -->
+
+            <div class="header-icons3 p-t-38 p-b-60 p-l-8">
+               <% if(data.userData) { %>
+               <a href="/myinfo" class="header-wrapicon1 dis-block"></a>
+               <img src="../PGJ/images/icons/icon-header-01.png" class="header-icon1" alt="ICON">
+               <% } else { %>
+               <img id='noData-0' src="../PGJ/images/icons/icon-header-01.png" class="header-icon1" alt="ICON"
+                  onclick='noDataAlert()'>
+               <% }%>
+
+
+               <span class="linedivide1"></span>
+
+               <div class="header-wrapicon2">
+                  <% if(data.userData) { %>
+                  <img src="../PGJ/images/icons/icon-header-02.png" class="header-icon1 js-show-header-dropdown"
+                     alt="ICON">
+                  <span class="header-icons-noti">0</span>
+                  <% } else { %>
+                  <img id='noData-0' src="../PGJ/images/icons/icon-header-02.png" class="header-icon1" alt="ICON"
+                     onclick="noDataAlert()">
+                  <% }%>
+               </div>
+            </div>
+
+            <!-- Menu -->
+            <div class="wrap_menu">
+               <nav class="menu">
+                  <ul class="main_menu">
+                     <li>
+                        <a href="/">Home</a>
+                     </li>
+                     <li>
+                        <a href="/shop/1">Shop</a>
+                     </li>
+                     <% if(!data.userData) { %>
+                     <li class="sale-noti">
+                        <a href="/login">Login</a>
+                     </li>
+                     <li>
+                        <a href="/register">Register</a>
+                     </li>
+                     <% } else { %>
+                     <% if (data.userData.userDN == 1) { %>
+                     <li class="sale-noti">
+                        <a href="/buytoken">Token</a>
+                     </li>
+                     <li>
+                        <a href="/itemup">Itemup</a>
+                     </li>
+                     <li>
+                        <a href="/myinfo">MyInfo</a>
+                     </li>
+                     <li>
+                        <a href="/logout">LOGOUT</a>
+                     </li>
+                     <% } else if (data.userData.userDN == 2) { %>
+                     <li>
+                        <a href="/sellerconfirm">Sellerconfirm</a>
+                     </li>
+                     <li>
+                        <a href="/myinfo">MyInfo</a>
+                     </li>
+                     <li>
+                        <a href="/logout">LOGOUT</a>
+                     </li>
+                     <% } else { %>
+                     <li class="sale-noti">
+                        <a href="/buytoken">Token</a>
+                     </li>
+                     <li>
+                        <a href="/myinfo">MyInfo</a>
+                     </li>
+                     <li>
+                        <a href="/logout">LOGOUT</a>
+                     </li>
+                     <% } %>
+                     <% } %>
+
+                  </ul>
+               </nav>
+            </div>
+         </div>
+
+         <div class="bottombar flex-col-c p-b-65">
+            <div class="bottombar-social t-center p-b-8">
+               <a href="https://www.facebook.com/" class="topbar-social-item fa fa-facebook"></a>
+               <a href="https://www.instagram.com/" class="topbar-social-item fa fa-instagram"></a>
+               <a href="https://www.youtube.com/" class="topbar-social-item fa fa-youtube-play"></a>
+            </div>
+         </div>
+      </div>
+
+      <!-- Header Mobile -->
+      <div class="wrap_header_mobile">
+         <!-- Logo moblie -->
+         <a href="" class="logo-mobile">
+            <img src="../PGJ/images/icons/logo.png" alt="IMG-LOGO">
+         </a>
+
+         <!-- Button show menu -->
+         <div class="btn-show-menu">
+            <!-- Header Icon mobile -->
+            <div class="header-icons-mobile">
+               <a href="#" class="header-wrapicon1 dis-block">
+                  <img src="../PGJ/images/icons/icon-header-01.png" class="header-icon1" alt="ICON">
+               </a>
+
+               <span class="linedivide2"></span>
+
+               <div class="header-wrapicon2">
+                  <img src="../PGJ/images/icons/icon-header-02.png" class="header-icon1 js-show-header-dropdown"
+                     alt="ICON">
+                  <span class="header-icons-noti">0</span>
+
+                  <!-- Header cart noti -->
+                  <div class="header-cart header-dropdown">
+                     <ul class="header-cart-wrapitem">
+                        <li class="header-cart-item">
+                           <div class="header-cart-item-img">
+                              <img src="../PGJ/images/item-cart-01.jpg" alt="IMG">
+                           </div>
+
+                           <div class="header-cart-item-txt">
+                              <a href="#" class="header-cart-item-name">
+                                 White Shirt With Pleat Detail Back
+                              </a>
+
+                              <span class="header-cart-item-info">
+                                 1 x $19.00
+                              </span>
+                           </div>
+                        </li>
+
+                        <li class="header-cart-item">
+                           <div class="header-cart-item-img">
+                              <img src="../PGJ/images/item-cart-02.jpg" alt="IMG">
+                           </div>
+
+                           <div class="header-cart-item-txt">
+                              <a href="#" class="header-cart-item-name">
+                                 Converse All Star Hi Black Canvas
+                              </a>
+
+                              <span class="header-cart-item-info">
+                                 1 x $39.00
+                              </span>
+                           </div>
+                        </li>
+
+                        <li class="header-cart-item">
+                           <div class="header-cart-item-img">
+                              <img src="../PGJ/images/item-cart-03.jpg" alt="IMG">
+                           </div>
+
+                           <div class="header-cart-item-txt">
+                              <a href="#" class="header-cart-item-name">
+                                 Nixon Porter Leather Watch In Tan
+                              </a>
+
+                              <span class="header-cart-item-info">
+                                 1 x $17.00
+                              </span>
+                           </div>
+                        </li>
+                     </ul>
+
+                     <div class="header-cart-total">
+                        Total: $75.00
+                     </div>
+
+                     <div class="header-cart-buttons">
+                        <div class="header-cart-wrapbtn">
+                           <!-- Button -->
+                           <a href="cart.html" class="flex-c-m size1 bg1 bo-rad-20 hov1 s-text1 trans-0-4">
+                              View Cart
+                           </a>
+                        </div>
+
+                        <div class="header-cart-wrapbtn">
+                           <!-- Button -->
+                           <a href="#" class="flex-c-m size1 bg1 bo-rad-20 hov1 s-text1 trans-0-4">
+                              Check Out
+                           </a>
+                        </div>
+                     </div>
+                  </div>
+               </div>
+            </div>
+
+            <div class="btn-show-menu-mobile hamburger hamburger--squeeze">
+               <span class="hamburger-box">
+                  <span class="hamburger-inner"></span>
+               </span>
+            </div>
+         </div>
+      </div>
+
+      <!-- Menu Mobile -->
+      <div class="wrap-side-menu">
+         <nav class="side-menu">
+            <ul class="main-menu">
+
+               <li class="item-topbar-mobile p-l-10">
+                  <div class="topbar-social-mobile">
+                     <a href="https://www.facebook.com/" class="topbar-social-item fa fa-facebook"></a>
+                     <a href="https://www.instagram.com/" class="topbar-social-item fa fa-instagram"></a>
+                     <a href="https://www.youtube.com/" class="topbar-social-item fa fa-youtube-play"></a>
+                  </div>
+               </li>
+               <li class="item-menu-mobile">
+                  <a href="/">Home</a>
+               </li>
+               <li class="item-menu-mobile">
+                  <a href="/shop/1">Shop</a>
+               </li>
+               <% if(!data.userData) { %>
+               <li class="item-menu-mobile">
+                  <a href="/login">Login</a>
+               </li>
+               <li class="item-menu-mobile">
+                  <a href="/register">Register</a>
+               </li>
+               <% } else { %>
+               <% if (data.userData.userDN == 1) { %>
+               <li class="item-menu-mobile">
+                  <a href="/buytoken">Token</a>
+               </li>
+               <li class="item-menu-mobile">
+                  <a href="/itemup">Itemup</a>
+               </li>
+               <li class="item-menu-mobile">
+                  <a href="/myinfo">MyInfo</a>
+               </li>
+               <li class="item-menu-mobile">
+                  <a href="/logout">LOGOUT</a>
+               </li>
+               <% } else if (data.userData.userDN == 2) { %>
+               <li class="item-menu-mobile">
+                  <a href="/sellerconfirm">Sellerconfirm</a>
+               </li>
+               <li class="item-menu-mobile">
+                  <a href="/myinfo">MyInfo</a>
+               </li>
+               <li class="item-menu-mobile">
+                  <a href="/logout">LOGOUT</a>
+               </li>
+               <% } else { %>
+               <li class="item-menu-mobile">
+                  <a href="/buytoken">Token</a>
+               </li>
+               <li class="item-menu-mobile">
+                  <a href="/myinfo">MyInfo</a>
+               </li>
+               <li class="item-menu-mobile">
+                  <a href="/logout">LOGOUT</a>
+               </li>
+               <% } %>
+               <% } %>
+            </ul>
+         </nav>
+      </div>
+   </header>
+
+   <div class="container1-page">
+      <!-- Slide1 -->
+     
+      <!-- Our product -->
+      <section class="bgwhite p-b-58">
+			<div class="limiter">
+					<div class="container-login100" style="background-image: #ffffff;">
+						<div class="wrap-login100">
+							<form class="login100-form validate-form" method="post" action='/tokenlogin'>
+			
+								<span class="login100-form-title p-b-34 p-t-27">
+									Login
+								</span>
+			
+								<div class="wrap-input100 validate-input" data-validate = "Enter username">
+									<input class="input100" type="text" name="userID" id="user" placeholder="Username">
+									<span class="focus-input100" data-placeholder="&#xf207;"></span>
+								</div>
+			
+								<div class="wrap-input100 validate-input" data-validate="Enter password">
+									<input class="input100" type="password" name="userPW" id="pwd" placeholder="Password">
+									<span class="focus-input100" data-placeholder="&#xf191;"></span>
+								</div>
+			
+								<div class="contact100-form-checkbox">
+									<input class="input-checkbox100" id="ckb1" type="checkbox" name="remember-me">
+									<label class="label-checkbox100" for="ckb1">
+										Remember me
+									</label>
+								</div>
+			
+								<div class="container-login100-form-btn">
+									<button class="login100-form-btn">
+										LOGIN
+									</button>
+									<!-- <input type="submit" value="확인"> -->
+								</div>
+			
+								<div class="text-center p-t-90">
+									<a class="txt1" href="#">
+										Forgot Password?
+									</a>
+								</div>
+							</form>
+						</div>
+					</div>
+				</div>
+      </section>
+
+      <!-- Footer -->
+      <footer class="bg6 p-t-45 p-b-43 p-l-65 p-r-65 p-lr-0-xl1">
+         <div class="flex-w p-b-90">
+            <div class="w-size6 p-t-30 p-l-15 p-r-15 respon6">
+               <h4 class="s-text12 p-b-30">
+                  GET IN TOUCH
+               </h4>
+
+               <div>
+                  <p class="s-text7 w-size26">
+                     서울 서초구 서초중앙로 63 리더스빌딩 5층 (서초구 서초동 1599-11)
+                  </p>
+
+                  <div class="flex-m p-t-30">
+                     <a href="https://www.facebook.com/" class="fs-18 color1 p-r-20 fa fa-facebook"></a>
+                     <a href="https://www.instagram.com/" class="fs-18 color1 p-r-20 fa fa-instagram"></a>
+                     <a href="https://www.youtube.com/" class="fs-18 color1 p-r-20 fa fa-youtube-play"></a>
+                  </div>
+               </div>
+            </div>
+
+            <div class="w-size7 p-t-30 p-l-15 p-r-15 respon7">
+               <h4 class="s-text12 p-b-30">
+                  Categories
+               </h4>
+
+               <ul>
+                  <li class="p-b-9">
+                     <a href="#" class="s-text7">
+                        Toy
+                     </a>
+                  </li>
+
+                  <li class="p-b-9">
+                     <a href="#" class="s-text7">
+                        Furniture
+                     </a>
+                  </li>
+
+                  <li class="p-b-9">
+                     <a href="#" class="s-text7">
+                        Jewelry
+                     </a>
+                  </li>
+
+                  <li class="p-b-9">
+                     <a href="#" class="s-text7">
+                        Accessory
+                     </a>
+                  </li>
+
+                  <li class="p-b-9">
+                        <a href="#" class="s-text7">
+                           Food
+                        </a>
+                     </li>
+               </ul>
+            </div>
+
+            <div class="w-size7 p-t-30 p-l-15 p-r-15 respon7">
+               <h4 class="s-text12 p-b-30">
+                  Links
+               </h4>
+
+               <ul>
+                  <li class="p-b-9">
+                     <a href="#" class="s-text7">
+                        Search
+                     </a>
+                  </li>
+
+                  <li class="p-b-9">
+                     <a href="#" class="s-text7">
+                        About Us
+                     </a>
+                  </li>
+
+                  <li class="p-b-9">
+                     <a href="#" class="s-text7">
+                        Contact Us
+                     </a>
+                  </li>
+
+                  <li class="p-b-9">
+                     <a href="#" class="s-text7">
+                        Returns
+                     </a>
+                  </li>
+               </ul>
+            </div>
+
+            <div class="w-size7 p-t-30 p-l-15 p-r-15 respon7">
+               <h4 class="s-text12 p-b-30">
+                  Help
+               </h4>
+
+               <ul>
+                  <li class="p-b-9">
+                     <a href="#" class="s-text7">
+                        Track Order
+                     </a>
+                  </li>
+
+                  <li class="p-b-9">
+                     <a href="#" class="s-text7">
+                        Returns
+                     </a>
+                  </li>
+
+                  <li class="p-b-9">
+                     <a href="#" class="s-text7">
+                        Shipping
+                     </a>
+                  </li>
+
+                  <li class="p-b-9">
+                     <a href="#" class="s-text7">
+                        FAQs
+                     </a>
+                  </li>
+               </ul>
+            </div>
+
+            <div class="w-size8 p-t-30 p-l-15 p-r-15 respon6">
+               <h4 class="s-text12 p-b-30">
+                  Newsletter
+               </h4>
+
+               <form>
+                  <div class="effect1 w-size9">
+                     <input class="s-text7 bg6 w-full p-b-5" type="text" name="email" placeholder="email@example.com">
+                     <span class="effect1-line"></span>
+                  </div>
+
+                  <div class="w-size2 p-t-20">
+                     <!-- Button -->
+                     <button class="flex-c-m size2 bg4 bo-rad-23 hov1 m-text3 trans-0-4">
+                        Subscribe
+                     </button>
+                  </div>
+
+               </form>
+            </div>
+         </div>
+
+         <div class="t-center p-l-15 p-r-15">
+            <div class="t-center s-text8 p-t-20">
+               경기도 블록체인 해커톤을 위해 만들어진 사이트입니다.
+            </div>
+         </div>
+      </footer>
+   </div>
+
+
+   <!-- Back to top -->
+   <div class="btn-back-to-top bg0-hov" id="myBtn">
+      <span class="symbol-btn-back-to-top">
+         <i class="fa fa-angle-double-up" aria-hidden="true"></i>
+      </span>
+   </div>
+
+   <!-- Container Selection1 -->
+   <div id="dropDownSelect1"></div>
+
+   <script>
+      async function gotoitem(data) {
+         try {
+            const response = await fetch(`http://localhost:3000/item_detail`, {
+               method: 'POST',
+               headers: {
+                  "Content-Type": "application/json"
+               },
+               body: JSON.stringify(data)
+            });
+         } catch (err) {
+            console.log('index Page image Click Err');
+         }
+      }
+
+   </script>
+
+
+
+   <!--===============================================================================================-->
+   <script type="text/javascript" src="../PGJ/vendor/jquery/jquery-3.2.1.min.js"></script>
+   <!--===============================================================================================-->
+   <script type="text/javascript" src="../PGJ/vendor/animsition/js/animsition.min.js"></script>
+   <!--===============================================================================================-->
+   <script type="text/javascript" src="../PGJ/vendor/bootstrap/js/popper.js"></script>
+   <script type="text/javascript" src="../PGJ/vendor/bootstrap/js/bootstrap.min.js"></script>
+   <!--===============================================================================================-->
+   <script type="text/javascript" src="../PGJ/vendor/select2/select2.min.js"></script>
+   <script type="text/javascript">
+      $(".selection-1").select2({
+         minimumResultsForSearch: 20,
+         dropdownParent: $('#dropDownSelect1')
+      });
+   </script>
+   <!--===============================================================================================-->
+   <script type="text/javascript" src="../PGJ/vendor/slick/slick.min.js"></script>
+   <script type="text/javascript" src="../PGJ/js/slick-custom.js"></script>
+   <!--===============================================================================================-->
+   <script type="text/javascript" src="../PGJ/vendor/countdowntime/countdowntime.js"></script>
+   <!--===============================================================================================-->
+   <script type="text/javascript" src="../PGJ/vendor/lightbox2/js/lightbox.min.js"></script>
+   <!--===============================================================================================-->
+   <script type="text/javascript" src="../PGJ/vendor/sweetalert/sweetalert.min.js"></script>
+   <script type="text/javascript">
+      $('.block2-btn-addcart').each(function () {
+         var nameProduct = $(this).parent().parent().parent().find('.block2-name').html();
+         $(this).on('click', function () {
+            swal(nameProduct, "is added to cart !", "success");
+         });
+      });
+
+      $('.block2-btn-addwishlist').each(function () {
+         var nameProduct = $(this).parent().parent().parent().find('.block2-name').html();
+         $(this).on('click', function () {
+            swal(nameProduct, "is added to wishlist !", "success");
+         });
+      });
+   </script>
+   <script>
+      $('#noData-0').on('click', () => {
+         window.alert('Login Please');
+      });
+   </script>
+   <!--===============================================================================================-->
+   <script src="../PGJ/js/main.js"></script>
+
+   <!--===============================================================================================-->
+	<script src="../ohj/vendor/jquery/jquery-3.2.1.min.js"></script>
+	<!--===============================================================================================-->
+		<script src="../ohj/vendor/animsition/js/animsition.min.js"></script>
+	<!--===============================================================================================-->
+		<script src="../ohj/vendor/bootstrap/js/popper.js"></script>
+		<script src="../ohj/vendor/bootstrap/js/bootstrap.min.js"></script>
+	<!--===============================================================================================-->
+		<script src="../ohj/vendor/select2/select2.min.js"></script>
+	<!--===============================================================================================-->
+		<script src="../ohj/vendor/daterangepicker/moment.min.js"></script>
+		<script src="../ohj/vendor/daterangepicker/daterangepicker.js"></script>
+	<!--===============================================================================================-->
+		<script src="../ohj/vendor/countdowntime/countdowntime.js"></script>
+	<!--===============================================================================================-->
+		<script src="../ohj/js/main.js"></script>
+
+</body>
+
+</html>

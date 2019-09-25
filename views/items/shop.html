@@ -1,0 +1,635 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+   <title>MIND MADE</title>
+   <meta charset="UTF-8">
+   <meta name="viewport" content="width=device-width, initial-scale=1">
+	<!--===============================================================================================-->
+	<link rel="icon" type="image/png" href="../PGJ/images/icons/favicon.png"/>
+	<!--===============================================================================================-->
+	   <link rel="stylesheet" type="text/css" href="../PGJ/vendor/bootstrap/css/bootstrap.min.css">
+	<!--===============================================================================================-->
+	   <link rel="stylesheet" type="text/css" href="../PGJ/fonts/font-awesome-4.7.0/css/font-awesome.min.css">
+	<!--===============================================================================================-->
+	   <link rel="stylesheet" type="text/css" href="../PGJ/fonts/themify/themify-icons.css">
+	<!--===============================================================================================-->
+	   <link rel="stylesheet" type="text/css" href="../PGJ/fonts/Linearicons-Free-v1.0.0/icon-font.min.css">
+	<!--===============================================================================================-->
+	   <link rel="stylesheet" type="text/css" href="../PGJ/fonts/elegant-font/html-css/style.css">
+	<!--===============================================================================================-->
+	   <link rel="stylesheet" type="text/css" href="../PGJ/vendor/animate/animate.css">
+	<!--===============================================================================================-->
+	   <link rel="stylesheet" type="text/css" href="../PGJ/vendor/css-hamburgers/hamburgers.min.css">
+	<!--===============================================================================================-->
+	   <link rel="stylesheet" type="text/css" href="../PGJ/vendor/animsition/css/animsition.min.css">
+	<!--===============================================================================================-->
+	   <link rel="stylesheet" type="text/css" href="../PGJ/vendor/select2/select2.min.css">
+	<!--===============================================================================================-->
+	   <link rel="stylesheet" type="text/css" href="../PGJ/vendor/daterangepicker/daterangepicker.css">
+	<!--===============================================================================================-->
+	   <link rel="stylesheet" type="text/css" href="../PGJ/vendor/slick/slick.css">
+	<!--===============================================================================================-->
+	   <link rel="stylesheet" type="text/css" href="../PGJ/vendor/lightbox2/css/lightbox.min.css">
+	<!--===============================================================================================-->
+	   <link rel="stylesheet" type="text/css" href="../PGJ/css/util.css">
+	   <link rel="stylesheet" type="text/css" href="../PGJ/css/main.css">
+	<!--===============================================================================================-->
+</head>
+
+<body class="animsition">
+   <!-- Header -->
+   <header class="header3">
+      <!-- Header desktop -->
+      <div class="container-menu-header-v3">
+         <div class="wrap_header3 p-t-74">
+            <!-- Logo -->
+            <a href="" class="logo3">
+               <img src="../PGJ/images/icons/logo.png" alt="IMG-LOGO">
+            </a>
+            <!-- Header Icon -->
+
+            <div class="header-icons3 p-t-38 p-b-60 p-l-8">
+               <% if(data.userData) { %>
+               <a href="/myinfo" class="header-wrapicon1 dis-block"></a>
+               <img src="../PGJ/images/icons/icon-header-01.png" class="header-icon1" alt="ICON">
+               <% } else { %>
+               <img id='noData-0' src="../PGJ/images/icons/icon-header-01.png" class="header-icon1" alt="ICON"
+                  onclick='noDataAlert()'>
+               <% }%>
+
+
+               <span class="linedivide1"></span>
+
+               <div class="header-wrapicon2">
+                  <% if(data.userData) { %>
+                  <img src="../PGJ/images/icons/icon-header-02.png" class="header-icon1 js-show-header-dropdown"
+                     alt="ICON">
+                  <% } else { %>
+                  <img id='noData-0' src="../PGJ/images/icons/icon-header-02.png" class="header-icon1" alt="ICON"
+                     onclick="noDataAlert()">
+                  <% }%>
+               </div>
+            </div>
+
+            <!-- Menu -->
+            <div class="wrap_menu">
+               <nav class="menu">
+                  <ul class="main_menu">
+                     <li>
+                        <a href="/">Home</a>
+                     </li>
+                     <li class="sale-noti">
+                        <a href="/shop/1">Shop</a>
+                     </li>
+                     <% if(!data.userData) { %>
+                     <li>
+                        <a href="/login">Login</a>
+                     </li>
+                     <li class="sale-noti">
+                        <a href="/register">Register</a>
+                     </li>
+                     <% } else { %>
+                     <% if (data.userData.userDN == 1) { %>
+                     <li>
+                        <a href="/buytoken">Token</a>
+                     </li>
+                     <li>
+                        <a href="/itemup">Itemup</a>
+                     </li>
+                     <li>
+                        <a href="/myinfo">MyInfo</a>
+                     </li>
+                     <li>
+                        <a href="/logout">LOGOUT</a>
+                     </li>
+                     <% } else if (data.userData.userDN == 2) { %>
+                     <li>
+                        <a href="/sellerconfirm">Sellerconfirm</a>
+                     </li>
+                     <li>
+                        <a href="/myinfo">MyInfo</a>
+                     </li>
+                     <li>
+                        <a href="/logout">LOGOUT</a>
+                     </li>
+                     <% } else { %>
+                     <li>
+                        <a href="/buytoken">Token</a>
+                     </li>
+                     <li>
+                        <a href="/myinfo">MyInfo</a>
+                     </li>
+                     <li>
+                        <a href="/logout">LOGOUT</a>
+                     </li>
+                     <% } %>
+                     <% } %>
+
+                  </ul>
+               </nav>
+            </div>
+         </div>
+
+         <div class="bottombar flex-col-c p-b-65">
+            <div class="bottombar-social t-center p-b-8">
+               <a href="https://www.facebook.com/" class="topbar-social-item fa fa-facebook"></a>
+               <a href="https://www.instagram.com/" class="topbar-social-item fa fa-instagram"></a>
+               <a href="https://www.youtube.com/" class="topbar-social-item fa fa-youtube-play"></a>
+            </div>
+         </div>
+      </div>
+
+      <!-- Header Mobile -->
+      <div class="wrap_header_mobile">
+         <!-- Logo moblie -->
+         <a href="" class="logo-mobile">
+            <img src="../PGJ/images/icons/logo.png" alt="IMG-LOGO">
+         </a>
+
+         <!-- Button show menu -->
+         <div class="btn-show-menu">
+            <!-- Header Icon mobile -->
+            <div class="header-icons-mobile">
+               <a href="#" class="header-wrapicon1 dis-block">
+                  <img src="../PGJ/images/icons/icon-header-01.png" class="header-icon1" alt="ICON">
+               </a>
+
+               <span class="linedivide2"></span>
+
+               <div class="header-wrapicon2">
+                  <img src="../PGJ/images/icons/icon-header-02.png" class="header-icon1 js-show-header-dropdown"
+                     alt="ICON">
+               </div>
+            </div>
+
+            <div class="btn-show-menu-mobile hamburger hamburger--squeeze">
+               <span class="hamburger-box">
+                  <span class="hamburger-inner"></span>
+               </span>
+            </div>
+         </div>
+      </div>
+
+      <!-- Menu Mobile -->
+      <div class="wrap-side-menu">
+         <nav class="side-menu">
+            <ul class="main-menu">
+
+               <li class="item-topbar-mobile p-l-10">
+                  <div class="topbar-social-mobile">
+                     <a href="https://www.facebook.com/" class="topbar-social-item fa fa-facebook"></a>
+                     <a href="https://www.instagram.com/" class="topbar-social-item fa fa-instagram"></a>
+                     <a href="https://www.youtube.com/" class="topbar-social-item fa fa-youtube-play"></a>
+                  </div>
+               </li>
+               <li class="item-menu-mobile">
+                  <a href="/">Home</a>
+               </li>
+               <li class="item-menu-mobile">
+                  <a href="/shop/1">Shop</a>
+               </li>
+               <% if(!data.userData) { %>
+               <li class="item-menu-mobile">
+                  <a href="/login">Login</a>
+               </li>
+               <li class="item-menu-mobile">
+                  <a href="/register">Register</a>
+               </li>
+               <% } else { %>
+               <% if (data.userData.userDN == 1) { %>
+               <li class="item-menu-mobile">
+                  <a href="/buytoken">Token</a>
+               </li>
+               <li class="item-menu-mobile">
+                  <a href="/itemup">Itemup</a>
+               </li>
+               <li class="item-menu-mobile">
+                  <a href="/myinfo">MyInfo</a>
+               </li>
+               <li class="item-menu-mobile">
+                  <a href="/logout">LOGOUT</a>
+               </li>
+               <% } else if (data.userData.userDN == 2) { %>
+               <li class="item-menu-mobile">
+                  <a href="/sellerconfirm">Sellerconfirm</a>
+               </li>
+               <li class="item-menu-mobile">
+                  <a href="/myinfo">MyInfo</a>
+               </li>
+               <li class="item-menu-mobile">
+                  <a href="/logout">LOGOUT</a>
+               </li>
+               <% } else { %>
+               <li class="item-menu-mobile">
+                  <a href="/buytoken">Token</a>
+               </li>
+               <li class="item-menu-mobile">
+                  <a href="/myinfo">MyInfo</a>
+               </li>
+               <li class="item-menu-mobile">
+                  <a href="/logout">LOGOUT</a>
+               </li>
+               <% } %>
+               <% } %>
+            </ul>
+         </nav>
+      </div>
+   </header>
+
+   <div class="container1-page">
+	<!-- Title Page -->
+	<section class="bg-title-page p-t-50 p-b-40 flex-col-c-m" style="background-image: url(../PGJ/images/heading-pages-02.jpg);">
+		<h2 class="l-text3 t-center">
+			MindMade
+		</h2>
+		<p class="m-text13-2 t-center">
+			We support your dream.
+		</p>
+	</section>
+
+
+	<!-- Content page -->
+	<section class="bgwhite p-t-55 p-b-65">
+		<div class="container">
+			<div class="row">
+				<div class="col-sm-6 col-md-4 col-lg-3 p-b-50">
+					<div class="leftbar p-r-20 p-r-0-sm">
+						<!--  -->
+						<h4 class="m-text14 p-b-7">
+							Categories
+						</h4>
+
+						<ul class="p-b-54">
+                            <li class="p-t-4">
+                                 <a href="#" class="s-text13">
+                                        All
+                                 </a>
+                            </li>
+
+                            <% for(var i=0; i<data.cateData.length; i++) { %>
+                                 <li class="p-t-4">
+                                    <a href="#" class="s-text13">
+                                        <%= data.cateData[i].content %>
+                                    </a>
+                                </li>
+                            <% } %>
+						</ul>
+
+
+						<!--  -->
+						<h4 class="m-text14 p-b-32">
+                                Filters
+                        </h4>
+
+						<div class="filter-price p-t-22 p-b-50 bo3">
+							<div class="m-text15 p-b-17">
+								Price
+							</div>
+
+							<div class="wra-filter-bar">
+								<div id="filter-bar"></div>
+							</div>
+
+							<div class="flex-sb-m flex-w p-t-16">
+								<div class="w-size11">
+									<!-- Button -->
+									<button class="flex-c-m size4 bg7 bo-rad-15 hov1 s-text14 trans-0-4">
+										Filter
+									</button>
+								</div>
+
+								<div class="s-text3 p-t-10 p-b-10">
+									Range: $<span id="value-lower">610</span> - $<span id="value-upper">980</span>
+								</div>
+							</div>
+						</div>
+
+						<div class="search-product pos-relative bo4 of-hidden">
+							<input class="s-text7 size6 p-l-23 p-r-50" type="text" name="search-product" placeholder="Search Products...">
+
+							<button class="flex-c-m size5 ab-r-m color2 color0-hov trans-0-4">
+								<i class="fs-12 fa fa-search" aria-hidden="true"></i>
+							</button>
+						</div>
+					</div>
+				</div>
+
+				<div class="col-sm-6 col-md-8 col-lg-9 p-b-50">
+					<% 
+					var page_list_size = data.pasing.page_list_size
+					var curPage = data.pasing.curPage
+					var totalPageCount = data.pasing.totalPageCount
+					%>
+					<!--  -->
+					<div class="flex-sb-m flex-w p-b-35">
+
+						<span class="s-text8 p-t-5 p-b-5">
+							Showing 1–9 of <%= data.itemData.length %> results
+						</span>
+					</div>
+
+                    <!-- Product -->
+                    
+					<div class="row">
+                            <% for( var i = (curPage*page_list_size) - page_list_size; i < (curPage*page_list_size); i++) { 
+                                
+                                if(i >= totalPageCount ) { 
+                                    break; 
+                                } else { 
+                                    %>
+                               <div class="col-sm-12 col-md-6 col-lg-4 p-b-50">
+                                    <!-- Block2 -->
+                                    <div class="block2">
+                                        <div class="block2-img wrap-pic-w of-hidden pos-relative">
+                                            <img src="../PGJ/images/itemimages/<%= data.itemData[i].item_img %>" alt="IMG-PRODUCT">
+                            
+                                            <div class="block2-overlay trans-0-4">
+                                                <a href="#" class="block2-btn-addwishlist hov-pointer trans-0-4">
+                                                    <i class="icon-wishlist icon_heart_alt" aria-hidden="true"></i>
+                                                    <i class="icon-wishlist icon_heart dis-none" aria-hidden="true"></i>
+                                                </a>
+                            
+                                                <div class="block2-btn-addcart w-size1 trans-0-4">
+                                                    <!-- Button -->
+                                                    <button class="flex-c-m size1 bg4 bo-rad-23 hov1 s-text1 trans-0-4">
+                                                        Add to Cart
+                                                    </button>
+                                                </div>
+                                            </div>
+                                        </div>
+                            
+                                        <div class="block2-txt p-t-20">
+                                            <form action='/item_detail' method='post'>
+                                                <button type='submit' name='data'value='<%= JSON.stringify(data.itemData[i]) %>'>
+                                                <a class="block2-name dis-block s-text3 p-b-5" > 
+                                                    <p>
+                                                    <%= data.itemData[i].item_name %>
+                                                    </p>
+                                                </a>
+                                                <span class="block2-price m-text6 p-r-5">
+                                                    <%= data.itemData[i].item_price %> MDT
+                                                </span>
+                                                </button>
+                                            <form>
+                                        </div>
+                                    </div>
+                                </div>
+                            <% } 
+                        } %>
+					</div>
+                    <script>
+                        
+                    </script>
+					<!-- Pagination -->
+					<div class="pagination flex-m flex-w p-t-26">
+                            <!-- <a href="/shop/1>" class="item-pagination flex-c-m trans-0-4">1</a>
+                            <a href="/shop/2" class="item-pagination flex-c-m trans-0-4">2</a> -->
+                            <%  
+                            for(var i = 0; i <= (totalPageCount/page_list_size); i++){ %>
+                            <a href="/shop/<%= i+1 %>" class="item-pagination flex-c-m trans-0-4"><%= i+1 %></a>
+                            <%
+                            }
+                            %>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+
+
+
+      <!-- Footer -->
+      <footer class="bg6 p-t-45 p-b-43 p-l-65 p-r-65 p-lr-0-xl1">
+         <div class="flex-w p-b-90">
+            <div class="w-size6 p-t-30 p-l-15 p-r-15 respon6">
+               <h4 class="s-text12 p-b-30">
+                  GET IN TOUCH
+               </h4>
+
+               <div>
+                  <p class="s-text7 w-size26">
+                     서울 서초구 서초중앙로 63 리더스빌딩 5층 (서초구 서초동 1599-11)
+                  </p>
+
+                  <div class="flex-m p-t-30">
+                     <a href="https://www.facebook.com/" class="fs-18 color1 p-r-20 fa fa-facebook"></a>
+                     <a href="https://www.instagram.com/" class="fs-18 color1 p-r-20 fa fa-instagram"></a>
+                     <a href="https://www.youtube.com/" class="fs-18 color1 p-r-20 fa fa-youtube-play"></a>
+                  </div>
+               </div>
+            </div>
+
+            <div class="w-size7 p-t-30 p-l-15 p-r-15 respon7">
+               <h4 class="s-text12 p-b-30">
+                  Categories
+               </h4>
+
+               <ul>
+                  <li class="p-b-9">
+                     <a href="#" class="s-text7">
+                        Toy
+                     </a>
+                  </li>
+
+                  <li class="p-b-9">
+                     <a href="#" class="s-text7">
+                        Furniture
+                     </a>
+                  </li>
+
+                  <li class="p-b-9">
+                     <a href="#" class="s-text7">
+                        Jewelry
+                     </a>
+                  </li>
+
+                  <li class="p-b-9">
+                     <a href="#" class="s-text7">
+                        Accessory
+                     </a>
+                  </li>
+
+                  <li class="p-b-9">
+                        <a href="#" class="s-text7">
+                           Food
+                        </a>
+                     </li>
+               </ul>
+            </div>
+
+            <div class="w-size7 p-t-30 p-l-15 p-r-15 respon7">
+               <h4 class="s-text12 p-b-30">
+                  Links
+               </h4>
+
+               <ul>
+                  <li class="p-b-9">
+                     <a href="#" class="s-text7">
+                        Search
+                     </a>
+                  </li>
+
+                  <li class="p-b-9">
+                     <a href="#" class="s-text7">
+                        About Us
+                     </a>
+                  </li>
+
+                  <li class="p-b-9">
+                     <a href="#" class="s-text7">
+                        Contact Us
+                     </a>
+                  </li>
+
+                  <li class="p-b-9">
+                     <a href="#" class="s-text7">
+                        Returns
+                     </a>
+                  </li>
+               </ul>
+            </div>
+
+            <div class="w-size7 p-t-30 p-l-15 p-r-15 respon7">
+               <h4 class="s-text12 p-b-30">
+                  Help
+               </h4>
+
+               <ul>
+                  <li class="p-b-9">
+                     <a href="#" class="s-text7">
+                        Track Order
+                     </a>
+                  </li>
+
+                  <li class="p-b-9">
+                     <a href="#" class="s-text7">
+                        Returns
+                     </a>
+                  </li>
+
+                  <li class="p-b-9">
+                     <a href="#" class="s-text7">
+                        Shipping
+                     </a>
+                  </li>
+
+                  <li class="p-b-9">
+                     <a href="#" class="s-text7">
+                        FAQs
+                     </a>
+                  </li>
+               </ul>
+            </div>
+
+            <div class="w-size8 p-t-30 p-l-15 p-r-15 respon6">
+               <h4 class="s-text12 p-b-30">
+                  Newsletter
+               </h4>
+
+               <form>
+                  <div class="effect1 w-size9">
+                     <input class="s-text7 bg6 w-full p-b-5" type="text" name="email" placeholder="email@example.com">
+                     <span class="effect1-line"></span>
+                  </div>
+
+                  <div class="w-size2 p-t-20">
+                     <!-- Button -->
+                     <button class="flex-c-m size2 bg4 bo-rad-23 hov1 m-text3 trans-0-4">
+                        Subscribe
+                     </button>
+                  </div>
+
+               </form>
+            </div>
+         </div>
+
+         <div class="t-center p-l-15 p-r-15">
+            <div class="t-center s-text8 p-t-20">
+               경기도 블록체인 해커톤을 위해 만들어진 사이트입니다.
+            </div>
+         </div>
+      </footer>
+   </div>
+</div>
+
+
+   <!-- Back to top -->
+   <div class="btn-back-to-top bg0-hov" id="myBtn">
+      <span class="symbol-btn-back-to-top">
+         <i class="fa fa-angle-double-up" aria-hidden="true"></i>
+      </span>
+   </div>
+
+   <!-- Container Selection1 -->
+   <div id="dropDownSelect1"></div>
+
+   <script>
+      async function gotoitem(data) {
+         try {
+            const response = await fetch(`http://localhost:3000/item_detail`, {
+               method: 'POST',
+               headers: {
+                  "Content-Type": "application/json"
+               },
+               body: JSON.stringify(data)
+            });
+         } catch (err) {
+            console.log('index Page image Click Err');
+         }
+      }
+
+   </script>
+
+
+
+   <!--===============================================================================================-->
+   <script type="text/javascript" src="../PGJ/vendor/jquery/jquery-3.2.1.min.js"></script>
+   <!--===============================================================================================-->
+   <script type="text/javascript" src="../PGJ/vendor/animsition/js/animsition.min.js"></script>
+   <!--===============================================================================================-->
+   <script type="text/javascript" src="../PGJ/vendor/bootstrap/js/popper.js"></script>
+   <script type="text/javascript" src="../PGJ/vendor/bootstrap/js/bootstrap.min.js"></script>
+   <!--===============================================================================================-->
+   <script type="text/javascript" src="../PGJ/vendor/select2/select2.min.js"></script>
+   <script type="text/javascript">
+      $(".selection-1").select2({
+         minimumResultsForSearch: 20,
+         dropdownParent: $('#dropDownSelect1')
+      });
+   </script>
+   <!--===============================================================================================-->
+   <script type="text/javascript" src="../PGJ/vendor/slick/slick.min.js"></script>
+   <script type="text/javascript" src="../PGJ/js/slick-custom.js"></script>
+   <!--===============================================================================================-->
+   <script type="text/javascript" src="../PGJ/vendor/countdowntime/countdowntime.js"></script>
+   <!--===============================================================================================-->
+   <script type="text/javascript" src="../PGJ/vendor/lightbox2/js/lightbox.min.js"></script>
+   <!--===============================================================================================-->
+   <script type="text/javascript" src="../PGJ/vendor/sweetalert/sweetalert.min.js"></script>
+   <script type="text/javascript">
+      $('.block2-btn-addcart').each(function () {
+         var nameProduct = $(this).parent().parent().parent().find('.block2-name').html();
+         $(this).on('click', function () {
+            swal(nameProduct, "is added to cart !", "success");
+         });
+      });
+
+      $('.block2-btn-addwishlist').each(function () {
+         var nameProduct = $(this).parent().parent().parent().find('.block2-name').html();
+         $(this).on('click', function () {
+            swal(nameProduct, "is added to wishlist !", "success");
+         });
+      });
+   </script>
+   <script>
+      $('#noData-0').on('click', () => {
+         window.alert('Login Please');
+      });
+   </script>
+   <!--===============================================================================================-->
+   <script src="../PGJ/js/main.js"></script>
+
+</body>
+
+</html>
