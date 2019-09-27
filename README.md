@@ -4,3 +4,13 @@ ethereumDapp_shopping_mall_escrow_payment
 ##### Gyeonggido Hackathon / Mind token Ethereum Project / EscrowPayment / ShoppingMall Dapp
 ##### 경기도 블록체인 해커톤 장려상 수상
 -------------
+* 박경재(팀장)
+  * 솔리디티, 프론트엔드 개발
+* 강서현
+  * 백엔드 개발
+* 오현준
+  * 프론트엔드 개발
+* 김석영
+  * 사업, 계획서
+* 함재준
+  * 사업, 계획서
