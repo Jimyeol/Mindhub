@@ -9,7 +9,7 @@ ethereumDapp_shopping_mall_escrow_payment
 * 강서현
   * 백엔드 개발
 * 오현준
-  * 프론트엔드 개발
+  * 프론트엔드 개발, 네트워크 
 * 김석영
   * 사업, 계획서
 * 함재준
