@@ -79,8 +79,6 @@ class User {
                                 userWallet: web3Data,
                                 userStatus: 0
                             }
-
-                            
                             resolve(req.session.user);
                     }
                 } catch (err) {

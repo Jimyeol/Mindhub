@@ -230,7 +230,7 @@ const abi = [
 		"type": "function"
 	}
 ];
-const contractAddr = '0xC0D23AC5b4a8390e609b21941bD4628099265aCd';
+const contractAddr = '0xc0d23ac5b4a8390e609b21941bd4628099265acd';
 const myContract = new web3.eth.Contract(abi, contractAddr);
 
 module.exports = { myContract, web3 };
